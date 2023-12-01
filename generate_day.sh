@@ -24,6 +24,7 @@ YEAR=`echo $YEAR | bc`
 DAY=`echo $DAY | bc`
 
 CONTENT=`cat <<EOF
+
 type Input = $INPUT
 type Output = $OUTPUT
 
@@ -50,12 +51,10 @@ EOF
 `
 
 CONTENT="`echo import System.Environment`
-
 $CONTENT"
 
 for module in $MODULES; do
     CONTENT="`echo import $module`
-
 $CONTENT"
 done
 
