@@ -3,7 +3,7 @@
 Let's talk a little bit about me first, shall we?
 
 This is my fourth time doing this in Haskell. Last year was the first time
-I managed to solve all days, so I thought I might stop doing thoses in Haskell
+I managed to solve all days, so I thought I might stop doing those in Haskell
 as I felt like I had accomplished everything I ought to do with this language.
 
 But after thinking for a while, looking for a challenge that would make me happy,
@@ -126,3 +126,13 @@ The only small problem that I had with part 2 was that "oneight" is actually "18
 so I cannot drop the whole "one" from the string (I was too lazy to check what can be a prefix of what to be optimise, so I simply drop the first letter)
 
 That's all for today folks!
+
+## BONUS ROUND!
+
+The Tiger programming language is a toy language used in Andrew Appel's book "Modern compiler implementation in ML"
+
+It also happens that a project at my school is to implement a compiler for that language.
+
+It also so happens that I'm a Tiger maintainer, which means that I'm working of the reference implementation and subject for that project.
+
+Anyway, all of that to say that I did day 1 in tiger lol 😻

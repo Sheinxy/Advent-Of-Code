@@ -1,0 +1,152 @@
+let
+    type str_arr = array of string
+    function readline() : string =
+        let
+            var res := ""
+            var buf := ""
+        in
+            while 1 do
+            (
+                buf := getchar();
+                if buf = "\n" | buf = "" then
+                    break
+                else
+                    res := concat(res, buf)
+            );
+            res
+        end
+
+    var lines := str_arr[2048] of ""
+    var line_count := 0
+
+    function getlines() : int =
+        let
+            var i := 0
+            var line := ""
+        in
+            while 1 do
+            (
+                line := readline();
+                if line = "" then
+                    break
+                else
+                    lines[i] := line;
+                i := i + 1
+            );
+            i
+        end
+
+    function get_digits(line : string) : int =
+        let
+            var c := "0"
+            var res := 0
+            var len := size(line)
+            var i := 0
+        in
+            while 1 do
+            (
+                c := substring(line, i, 1);
+                if "0" <= c & c <= "9" then
+                    break;
+                i := i + 1
+            );
+            res := 10 * (ord(c) - ord("0"));
+            i := len - 1;
+            while 1 do
+            (
+                c := substring(line, i, 1);
+                if "0" <= c & c <= "9" then
+                    break;
+                i := i - 1
+            );
+            res := res + (ord(c) - ord("0"));
+            res
+        end 
+
+    function part_one() =
+        let
+            var res := 0
+        in
+            for i := 0 to line_count - 1 do
+                res := res + get_digits(lines[i]);
+            print_int(res)
+        end
+
+    function get_digits2(line : string) : int =
+        let
+            var c := "0"
+            var res := 0
+            var len := size(line)
+            var i := 0
+        in
+            while 1 do
+            (
+                c := substring(line, i, 1);
+                if "0" <= c & c <= "9" then
+                    break;
+                if i + 3 <= len & substring(line, i, 3) = "one" then
+                    ( c := "1"; break);
+                if i + 3 <= len & substring(line, i, 3) = "two" then
+                    ( c := "2"; break);
+                if i + 5 <= len & substring(line, i, 5) = "three" then
+                    ( c := "3"; break);
+                if i + 4 <= len & substring(line, i, 4) = "four" then
+                    ( c := "4"; break);
+                if i + 4 <= len & substring(line, i, 4) = "five" then
+                    ( c := "5"; break);
+                if i + 3 <= len & substring(line, i, 3) = "six" then
+                    ( c := "6"; break);
+                if i + 5 <= len & substring(line, i, 5) = "seven" then
+                    ( c := "7"; break);
+                if i + 5 <= len & substring(line, i, 5) = "eight" then
+                    ( c := "8"; break);
+                if i + 4 <= len & substring(line, i, 4) = "nine" then
+                    ( c := "9"; break);
+                i := i + 1
+            );
+            res := 10 * (ord(c) - ord("0"));
+            i := len - 1;
+            while 1 do
+            (
+                c := substring(line, i, 1);
+                if "0" <= c & c <= "9" then
+                    break;
+                if i + 3 <= len & substring(line, i, 3) = "one" then
+                    ( c := "1"; break);
+                if i + 3 <= len & substring(line, i, 3) = "two" then
+                    ( c := "2"; break);
+                if i + 5 <= len & substring(line, i, 5) = "three" then
+                    ( c := "3"; break);
+                if i + 4 <= len & substring(line, i, 4) = "four" then
+                    ( c := "4"; break);
+                if i + 4 <= len & substring(line, i, 4) = "five" then
+                    ( c := "5"; break);
+                if i + 3 <= len & substring(line, i, 3) = "six" then
+                    ( c := "6"; break);
+                if i + 5 <= len & substring(line, i, 5) = "seven" then
+                    ( c := "7"; break);
+                if i + 5 <= len & substring(line, i, 5) = "eight" then
+                    ( c := "8"; break);
+                if i + 4 <= len & substring(line, i, 4) = "nine" then
+                    ( c := "9"; break);
+                i := i - 1
+            );
+            res := res + (ord(c) - ord("0"));
+            res
+        end 
+
+    function part_two() =
+        let
+            var res := 0
+        in
+            for i := 0 to line_count - 1 do
+                res := res + get_digits2(lines[i]);
+            print_int(res)
+        end
+in
+    line_count := getlines();
+    part_one();
+    print("\n");
+    part_two();
+    print("\n")
+end
