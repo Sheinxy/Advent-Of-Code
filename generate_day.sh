@@ -13,7 +13,7 @@ until [ $# -eq 0 ]; do
         -o|--output)  OUTPUT="$2"; shift;;
         -m|--modules) MODULES="$MODULES $2"; shift;;
         -y|--year)    YEAR="$2"; shift;;
-        -d|--day)     DAT="$2"; shift;;
+        -d|--day)     DAY="$2"; shift;;
         --dry-run)    DRY_RUN=1;;
         *)            DAY="$1";;
     esac
@@ -48,6 +48,11 @@ main = do
     mapM (compute input)  $ init args 
 EOF
 `
+
+CONTENT="`echo import System.Environment`
+
+$CONTENT"
+
 for module in $MODULES; do
     CONTENT="`echo import $module`
 
