@@ -28,7 +28,7 @@ CONTENT=`cat <<EOF
 type Input = $INPUT
 type Output = $OUTPUT
 
-parseInput :: Input -> Output
+parseInput :: String -> Input
 parseInput = error "Not Implemented"
 
 partOne :: Input -> Output
