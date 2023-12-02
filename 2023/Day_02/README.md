@@ -19,7 +19,7 @@ parseInput = map (map makeCube . matchCube) . lines
           makeCube [_, n, "green"] = Green (read n)
 
 partOne :: Input -> Output
-partOne = sum . map fst . filter (all id . map validate . snd) . zip [1 .. ]
+partOne = sum . map fst . filter (all validate . snd) . zip [1 .. ]
     where validate (Blue  n) = n <= 14
           validate (Green n) = n <= 13
           validate (Red   n) = n <= 12
