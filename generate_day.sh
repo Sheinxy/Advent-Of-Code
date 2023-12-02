@@ -80,3 +80,5 @@ cd Day_`printf %02d $DAY`
 
 echo "$CONTENT" > Day_`printf %02d $DAY`.hs
 curl --cookie "session=$AOC_SESSION" "https://adventofcode.com/$YEAR/day/$DAY/input" > input
+
+echo "## Day `printf %02d $DAY` > README.md
