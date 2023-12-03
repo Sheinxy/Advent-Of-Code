@@ -32,14 +32,14 @@ parseInput input = (grid, numbers, gears)
 partOne :: Input -> Output
 partOne (grid, numbers, _) = sum . map (value) . filter isAdjacent $ numbers
     where maxRow = nrows grid
-          maxCol = nrows grid
+          maxCol = ncols grid
           getNeighbours (Number _ r (c1, c2)) = map (grid !) [(i, j) | i <- [r - 1 .. r + 1], j <- [c1 - 1 .. c2 + 1], 0 < i && i <= maxRow, 0 < j && j <= maxCol]
           isAdjacent = any (\c -> not (isDigit c) && c /= '.') . getNeighbours
 
 partTwo :: Input -> Output
 partTwo (grid, numbers, gears) = sum . map (product . map value) . filter ((== 2) . length) . map getNeighbours $ gears
     where maxRow = nrows grid
-          maxCol = nrows grid
+          maxCol = ncols grid
           getNeighboursPos (r, c) = [(i, j) | i <- [r - 1 .. r + 1], j <- [c - 1 .. c + 1], 0 < i && i <= maxRow, 0 < j && j <= maxCol]
           getNeighbours g = filter (\(Number _ r (c1, c2)) -> any (`elem` neighbours) [(r, c) | c <- [c1 .. c2]]) numbers where neighbours = getNeighboursPos g
 ```
@@ -115,7 +115,7 @@ Now for the puzzles themselves:
 partOne :: Input -> Output
 partOne (grid, numbers, _) = sum . map (value) . filter isAdjacent $ numbers
     where maxRow = nrows grid
-          maxCol = nrows grid
+          maxCol = ncols grid
           getNeighbours (Number _ r (c1, c2)) = map (grid !) [(i, j) | i <- [r - 1 .. r + 1], j <- [c1 - 1 .. c2 + 1], 0 < i && i <= maxRow, 0 < j && j <= maxCol]
           isAdjacent = any (\c -> not (isDigit c) && c /= '.') . getNeighbours
 ```
@@ -128,7 +128,7 @@ Part two is similar:
 partTwo :: Input -> Output
 partTwo (grid, numbers, gears) = sum . map (product . map value) . filter ((== 2) . length) . map getNeighbours $ gears
     where maxRow = nrows grid
-          maxCol = nrows grid
+          maxCol = ncols grid
           getNeighboursPos (r, c) = [(i, j) | i <- [r - 1 .. r + 1], j <- [c - 1 .. c + 1], 0 < i && i <= maxRow, 0 < j && j <= maxCol]
           getNeighbours g = filter (\(Number _ r (c1, c2)) -> any (`elem` neighbours) [(r, c) | c <- [c1 .. c2]]) numbers where neighbours = getNeighboursPos g
 ```
