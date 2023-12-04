@@ -88,7 +88,7 @@ Now for the hard part:
           numRow  = zip [1 .. ] $ map (filter (\(_, n) -> all isDigit n)) cleaned
           numbers = concatMap (\(r, row) -> map (\(s, n) -> Number (read n) r s) row) numRow
 ```
-I start by labelling each column in each row, then I group every number digit together (so I get the numbers whole in the for [(col1, digit 1), (col2, digit2) ...]).
+I start by labelling each column in each row, then I group every number digit together (so I get the numbers whole in the form [(col1, digit 1), (col2, digit2) ...]).
 
 After that, I clean things around by taking only the first and last column for each digit, and putting the digits together in a list: ((col1, colLast), [digit1, digit2, ...])
 
@@ -119,7 +119,7 @@ partOne (grid, numbers, _) = sum . map (value) . filter isAdjacent $ numbers
           getNeighbours (Number _ r (c1, c2)) = map (grid !) [(i, j) | i <- [r - 1 .. r + 1], j <- [c1 - 1 .. c2 + 1], 0 < i && i <= maxRow, 0 < j && j <= maxCol]
           isAdjacent = any (\c -> not (isDigit c) && c /= '.') . getNeighbours
 ```
-I use a function getNeighbours that, for a given number, generates the list of possible neighbour coordinates and maps this list to the values in the frid. Then I simply need to check if any of these values is a symbol (ie not . nor number) to know that this number is adjacent to one.
+I use a function getNeighbours that, for a given number, generates the list of possible neighbour coordinates and maps this list to the values in the grid. Then I simply need to check if any of these values is a symbol (ie not . nor number) to know that this number is adjacent to one.
 
 I filter the numbers that are adjacent to a symbol, get their values and sum them together!
 
