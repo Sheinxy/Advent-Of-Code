@@ -43,7 +43,7 @@ I have a data structure to represent a card. A card is a set of winning numbers 
 
 To get my list of cards (ie my input), I start, as always, by getting all the lines from the file. For each line, I first get rid of the "Card XXX:" part, as I am not interested in that part (and I can always find it back by using the index of the card in the list).
 
-Using the break function, I can my strings in two parts: the winning numbers and the picked numbers. For example, if my current line is (after removing the Card XXX:) "42 12 | 7 81", I would get back the pair ("42 12 ", "| 7 81").
+Using the break function, I can split my strings in two parts: the winning numbers and the picked numbers. For example, if my current line is (after removing the Card XXX:) "42 12 | 7 81", I would get back the pair ("42 12 ", "| 7 81").
 
 From that pair, I can get the numbers by simply splitting both strings by spaces and converting the strings into integers. I still need to get read of the leading "|" in the first pair though. I convert both list into sets for convenience (and faster computation)
 
