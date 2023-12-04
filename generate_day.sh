@@ -1,7 +1,7 @@
 #!/bin/sh
 
 INPUT="String"
-OUTPUT="String"
+OUTPUT="Int"
 MODULES=""
 DRY_RUN=0
 YEAR=`date +%Y`
