@@ -132,7 +132,7 @@ partTwo (grid, numbers, gears) = sum . map (product . map value) . filter ((== 2
           getNeighboursPos (r, c) = [(i, j) | i <- [r - 1 .. r + 1], j <- [c - 1 .. c + 1], 0 < i && i <= maxRow, 0 < j && j <= maxCol]
           getNeighbours g = filter (\(Number _ r (c1, c2)) -> any (`elem` neighbours) [(r, c) | c <- [c1 .. c2]]) numbers where neighbours = getNeighboursPos g
 ```
-This time, I first generate the list of neighbouring coordinates, and the I filter the number list by checking if any matches these coordinates.
+This time, I first generate the list of neighbouring coordinates, and then I filter the number list by checking if any matches these coordinates.
 
 Then for each gear I keep those with exactly two neighbours, I get the value of these neighbours and multiply them, and I sum all the results.
 
