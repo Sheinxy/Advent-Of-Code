@@ -34,10 +34,10 @@ findMapWithRange smap (source, stop)
         where inLookup = filter (\(Map s e _) -> s <= source && stop <= e) smap    -- Case 0: The range is inside an interval
               inDiff   = diff . head $ inLookup
               -- Looking for ranges covered by the seeds
-              covRanges = filter (\(Map s e _) -> (source < s  && e < stop)   ||   -- Case 1: The interval is fully in range
-                                                  (s <= source && source < e) ||   -- Case 2: The start of range is in interval
-                                                  (s < stop    && stop <= e)) smap -- Case 3: The end of range is in interval
-              bounds    = sort . ([source, stop] ++) . filter (\n -> source < n && n < stop) . concatMap (\m -> [start m, end m]) $ covRanges
+              covRanges      = filter (\(Map s e _) -> (source < s  && e < stop)   ||   -- Case 1: Interval is fully in range
+                                                       (s <= source && source < e) ||   -- Case 2: Start of range is in interval
+                                                       (s < stop    && stop <= e)) smap -- Case 3: End of range is in interval
+              bounds         = sort . ([source, stop] ++) . filter (\n -> source < n && n < stop) . concatMap (\m -> [start m, end m]) $ covRanges
               newIntervals   = zip bounds (tail bounds) -- Subintervals spanning (source, stop(
               -- Aliases to describe the two cases:
               isInInterval   = not . null $ inLookup  -- The range is fully in an interval
