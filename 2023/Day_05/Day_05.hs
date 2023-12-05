@@ -19,9 +19,9 @@ parseInput input = (seeds, maps)
           getMaps [dsr, srs, rl] = Map srs (srs + rl) (dsr - srs)
 
 findMap :: Int -> SourceMap -> Int
-findMap source map | not . null $ lookup = source + (diff . head $ lookup)
+findMap source smap | not . null $ lookup = source + (diff . head $ lookup)
                    | otherwise           = source
-                   where lookup = filter (\(Map s e _) -> s <= source && source <= e) $ map
+                   where lookup = filter (\(Map s e _) -> s <= source && source <= e) smap
 
 partOne :: Input -> Output
 partOne (seeds, maps) = minimum . map (\x -> foldl findMap x maps) $ seeds
