@@ -11,11 +11,10 @@ parseInput = uncurry zip . go . lines
     where go [t, d] = both (map read . tail . words) (t, d)
 
 getBounds :: (Integer, Integer) -> (Int, Int)
-getBounds (t, d) = (ceiling (top - 1), floor (bot + 1))
+getBounds (t, d) = (ceiling (t2 - 1), floor (t1 + 1))
     where delta      = t * t - 4 * d
           root       = sqrt(fromIntegral delta)
           (t1 , t2)  = ((fromIntegral t - root) / 2, (fromIntegral t + root) / 2)
-          (bot, top) = (min t1 t2, max t1 t2)
 
 partOne :: Input -> Output
 partOne = product . map ((+ 1) . uncurry (-)) . map getBounds
