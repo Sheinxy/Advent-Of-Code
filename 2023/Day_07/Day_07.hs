@@ -40,7 +40,7 @@ parseInput :: String -> Input
 parseInput =  map ((\[c, b] -> Hand c (read b) (getType c) "23456789TJQKA") . words) . lines
 
 partOne :: Input -> Output
-partOne = sum . map (\(n, h) -> n * bid h) . zip [1 .. ] . sort
+partOne = sum . map (uncurry (*)) . zip [1 .. ] . map bid . sort
 
 partTwo :: Input -> Output
 partTwo = partOne . map convertHand
