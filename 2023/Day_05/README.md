@@ -108,8 +108,8 @@ If no map matches that condition, then the number stays the same.
 
 To get my result:
     - For a given seed, I apply the findMap function described above to get the new value of that seed, and I apply the findMap function to that new value etc. until I have applied it to every map.
-    - I do that for all seeds
-    - I keep the minimum result
+ - I do that for all seeds
+ - I keep the minimum result
 
 
 Now part 2 is where things get... interesting...
@@ -140,23 +140,23 @@ I am going to go into more details later, but for now remember that findMapWithR
 and returns a list of new seed ranges given by the input seed range.
 
 I will start by first describing partTwo as it is easier:
-    - I get all my seed ranges by chunking my seed list into chunks of two.
-    - For each seed range I get the ranges of output locations using the go function that I will describe later.
+ - I get all my seed ranges by chunking my seed list into chunks of two.
+ - For each seed range I get the ranges of output locations using the go function that I will describe later.
       Once I have all the ranges, I concat them all into a single list of ranges as I do not care much about which seed range gave which location range
-    - For each location range I get the start of the range as it will always be the minimum value for a range, and to get the puzzle answer I find the minimum of those starts.
+ - For each location range I get the start of the range as it will always be the minimum value for a range, and to get the puzzle answer I find the minimum of those starts.
 
 The go function is a bit similar to what the partOne function did:
-    - For a seed range of the form (start, end) (and not of the form (start, length)), I apply the findMapWithRange function to the first map,
+ - For a seed range of the form (start, end) (and not of the form (start, length)), I apply the findMapWithRange function to the first map,
       which gives me a list of new ranges.
-    - With that list of new ranges (and with subsequent new lists in fact. In fact, you should notice that I have always been working with a list of ranges [(s, s + r)]), I apply the findMapWithRange to each range in that list, and I concat all of the list results together inside one list of new ranges. I do that until I have applied the new ranges to the last map.
+ - With that list of new ranges (and with subsequent new lists in fact. In fact, you should notice that I have always been working with a list of ranges [(s, s + r)]), I apply the findMapWithRange to each range in that list, and I concat all of the list results together inside one list of new ranges. I do that until I have applied the new ranges to the last map.
 
 
 
 NOW FOR THE HARD PART: findMapWithRange
 
 There are two easy cases:
-    - ![Default case](https://cdn.discordapp.com/attachments/455387472730259459/1182100573349228635/image.png?ex=658377f3&is=657102f3&hm=325db2e110f7b844a29f5ffc160c15046ac9d6acdf50ab09189a49f6030ad478&) The case where there is no map interval in our sourcemap that intersects our range. In that case, the range yields only itself as a result (as every number in the range with be mapped to itself). This case is so simple that we shall consider it our default case.
-    - ![Fully mapped](https://cdn.discordapp.com/attachments/455387472730259459/1182100024243535943/image.png?ex=65837770&is=65710270&hm=a856c7e50d22387b77742d87731e5eeec1867a6ab37fcbda2aa87d83b7e4e2c1&) The case where the range is fully mapped by a single map interval in our sourcemap. In that case, the range yields a single new range because the transformation is a single addition applied to every number in that range.
+ - ![Default case](https://cdn.discordapp.com/attachments/455387472730259459/1182100573349228635/image.png?ex=658377f3&is=657102f3&hm=325db2e110f7b844a29f5ffc160c15046ac9d6acdf50ab09189a49f6030ad478&) The case where there is no map interval in our sourcemap that intersects our range. In that case, the range yields only itself as a result (as every number in the range with be mapped to itself). This case is so simple that we shall consider it our default case.
+ - ![Fully mapped](https://cdn.discordapp.com/attachments/455387472730259459/1182100024243535943/image.png?ex=65837770&is=65710270&hm=a856c7e50d22387b77742d87731e5eeec1867a6ab37fcbda2aa87d83b7e4e2c1&) The case where the range is fully mapped by a single map interval in our sourcemap. In that case, the range yields a single new range because the transformation is a single addition applied to every number in that range.
 
 Then, there is the third, hard case. That is when the range either intersects or even fully contains (while not fully equaling) a map interval in the sourcemap.
 
