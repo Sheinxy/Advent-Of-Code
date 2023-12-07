@@ -6,7 +6,6 @@ import Data.List
 import Data.Map (Map, (!), fromList)
 import Data.Ord
 import Data.Text (replace, unpack, pack)
-import Data.Tuple.Extra (both)
 import System.Environment
 
 data Hand = Hand { cards :: String, bid :: Int, hType :: Type, order :: String} deriving (Eq, Show)
