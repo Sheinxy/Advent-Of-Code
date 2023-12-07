@@ -136,3 +136,48 @@ but instead I simply replace every joker with every single card type and I get t
 It is interesting to note that I'm always replacing every joker with the same card type: I have not proven that it will always give the best result, but I highly strongly really pretty much 99% confidently believe that it does. My reasoning being that the type of hands with more cards of the same type are always better than the ones with multiple smaller groups of cards. (e.g, it is better to have [1, 1, 3] than [1, 2, 2])
 
 And that's about it. Now that everything is converted, I simply call part one again, as the algorithm doesn't change thanks to the fact that the way to order hands is the same.
+
+## BONUS ROUND: I DID IT WITHOUT WRITING INSTANCE ONCE:
+```hs
+{-# LANGUAGE OverloadedStrings #-}
+module Main where
+
+import Data.List
+import Data.Map (fromList, (!))
+import Data.Text (replace, unpack, pack)
+import System.Environment
+
+data Hand = Hand { hType :: Type, cards :: [Int], bid :: Int, raw :: String } deriving (Eq, Ord, Show)
+data Type = High | One | Two | Three | Full | Four | Five deriving (Eq, Ord, Show)
+
+type Input = [Hand]
+type Output = Int
+
+getType :: String -> Type
+getType = go . sort . map length . group . sort
+    where go [5]          = Five
+          go [1, 4]       = Four
+          go [2, 3]       = Full
+          go [1, 1, 3]    = Three
+          go [1, 2, 2]    = Two
+          go [1, 1, 1, 2] = One
+          go _            = High
+
+getCards :: String -> String -> [Int]
+getCards strength = map (mapping !)
+    where mapping = fromList $ zip strength [1 .. ]
+
+parseInput :: String -> Input
+parseInput =  map ((\[c, b] -> Hand (getType c) (getCards "23456789TJQKA" c) (read b) c) . words) . lines
+
+partOne :: Input -> Output
+partOne = sum . map (uncurry (*)) . zip [1 .. ] . map bid . sort
+
+getJokeType :: String -> Type
+getJokeType s = maximum . map getType . map replaceJ $ "23456789TQKA"
+    where replaceJ c = unpack . replace "J" (pack [c]) . pack $ s
+
+partTwo :: Input -> Output
+partTwo = partOne . map convertHand
+    where convertHand h = h { hType = (getJokeType $ raw h), cards = (getCards "J23456789TQKA" $ raw h) }
+```
