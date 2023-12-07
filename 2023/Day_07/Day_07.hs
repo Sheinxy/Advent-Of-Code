@@ -1,11 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Data.Function (on)
 import Data.List (group, sort)
 import Data.Map (Map, (!), fromList)
 import Data.Ord (compare)
 import Data.Text (replace, unpack, pack)
+import Data.Tuple.Extra (both)
 import System.Environment
 
 data Hand = Hand { cards :: String, bid :: Int, hType :: Type, order :: String} deriving (Eq, Show)
@@ -15,8 +15,7 @@ instance Ord Hand where
     (Hand c1 _ t1 o1) `compare` (Hand c2 _ t2 o2) 
         | o1 /= o2  = error "Comparing different games"
         | t1 /= t2  = t1 `compare` t2
-        | otherwise = uncurry (compare `on` (cardStrength !)) .
-                      head . dropWhile (uncurry (==)) $ zip c1 c2
+        | otherwise = uncurry compare $ both (map (cardStrength !)) (c1, c2)
         where cardStrength = fromList $ zip o1 [1 .. ]
 
 type Input = [Hand]
