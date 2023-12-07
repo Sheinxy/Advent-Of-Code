@@ -158,7 +158,7 @@ There are two easy cases:
  - ![Default case](https://cdn.discordapp.com/attachments/455387472730259459/1182100573349228635/image.png?ex=658377f3&is=657102f3&hm=325db2e110f7b844a29f5ffc160c15046ac9d6acdf50ab09189a49f6030ad478&) The case where there is no map interval in our sourcemap that intersects our range. In that case, the range yields only itself as a result (as every number in the range with be mapped to itself). This case is so simple that we shall consider it our default case.
  - ![Fully mapped](https://cdn.discordapp.com/attachments/455387472730259459/1182100024243535943/image.png?ex=65837770&is=65710270&hm=a856c7e50d22387b77742d87731e5eeec1867a6ab37fcbda2aa87d83b7e4e2c1&) The case where the range is fully mapped by a single map interval in our sourcemap. In that case, the range yields a single new range because the transformation is a single addition applied to every number in that range.
 
-Then, there is the third, hard case. That is when the range either intersects or even fully contains (while not fully equaling) a map interval in the sourcemap.
+Then, there is the third, hard case. That is when the range either intersects or even fully contains (while not fully equating) a map interval in the sourcemap.
 
 To handle this, one thing we can do is split our range into smaller subranges (green and purple on the really bad drawing below) that all fall inside one of the two easy cases:
 ![Sorry for the bad drawing, I made this on a trackpad](https://media.discordapp.net/attachments/455387472730259459/1182102336273915964/image.png?ex=65837997&is=65710497&hm=f7768994db5005e36841e01bf3330dad1803bf01df17102e18c3178e1f430acf&=&format=webp&quality=lossless&width=2160&height=1120)
