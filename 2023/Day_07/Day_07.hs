@@ -1,10 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Data.Function
-import Data.List
+import Data.Function (on)
+import Data.List (group, sort)
 import Data.Map (Map, (!), fromList)
-import Data.Ord
+import Data.Ord (compare)
 import Data.Text (replace, unpack, pack)
 import System.Environment
 
