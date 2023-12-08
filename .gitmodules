@@ -1,0 +1,9 @@
+[submodule "2020"]
+	path = 2020
+	url = git@github.com:Sheinxy/Advent2020.git
+[submodule "2021"]
+	path = 2021
+	url = git@github.com:Sheinxy/Advent2021.git
+[submodule "2022"]
+	path = 2022
+	url = git@github.com:Sheinxy/Advent2022.git
