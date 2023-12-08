@@ -12,7 +12,7 @@ type Input = (String, Map String Node)
 type Output = Int
 
 parseInput :: String -> Input
-parseInput = (\(inst : _ : nodes) -> (concat . repeat $ inst, fromList . map getNode $ nodes)) . lines
+parseInput = (\(inst : _ : nodes) -> (cycle inst, fromList . map getNode $ nodes)) . lines
     where getNode node = (\[idx, l, r] -> (idx, Node l r)) $ tail . head $ (node =~ "(.{3}) = .(.{3}), (.{3})." :: [[String]])
 
 partOne :: Input -> Output
