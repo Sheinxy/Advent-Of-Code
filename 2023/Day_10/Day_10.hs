@@ -128,9 +128,51 @@ getInsideOfLoop input@(s, g) = (inside, g'')
 partTwo :: Input -> Output
 partTwo = size . fst . getInsideOfLoop
 
+-- Bonus functions for the write-up! 😸
+
+-- Bonus round: print the loop :)
+printLoop :: Input -> IO ()
+printLoop input@(s, g) = putStrLn . concatMap (++ "\n") $ toLists g''
+    where loop = fromList $ getLoop input
+          rows = nrows g
+          cols = ncols g
+          inGrid (row, col) = 0 < row && row <= rows && 0 < col && col <= cols
+          g'         = setElem (getType g s) s g
+          g''        = foldr (setElem '.') g' [(i, j) | i <- [1 .. nrows g], j <- [1 .. ncols g], g' ! (i, j) /= '.', (i, j) `notMember` loop]
+
+-- Bonus round: print the border of the loop :)
+printBorder :: Input -> IO ()
+printBorder input@(s, g) = putStrLn . concatMap (++ "\n") $ toLists final
+    where loop = fromList $ getLoop input
+          rows = nrows g
+          cols = ncols g
+          inGrid (row, col) = 0 < row && row <= rows && 0 < col && col <= cols
+          g'         = setElem (getType g s) s g
+          g''        = foldr (setElem '.') g' [(i, j) | i <- [1 .. nrows g], j <- [1 .. ncols g], g' ! (i, j) /= '.', (i, j) `notMember` loop]
+          (l, r)     = followLoop g'' loop
+          bL      = foldr (setElem 'l') g'' . filter inGrid $ toList l
+          final   = foldr (setElem 'r') bL . filter inGrid $ toList r
+
+-- Printing the naive outside part of the loop with Os
+printOutside :: Input -> IO ()
+printOutside input@(s, g) = putStrLn . concatMap (++ "\n") $ toLists final
+    where loop = fromList $ getLoop input
+          rows = nrows g
+          cols = ncols g
+          inGrid (row, col) = 0 < row && row <= rows && 0 < col && col <= cols
+          g'         = setElem (getType g s) s g
+          g''        = foldr (setElem '.') g' [(i, j) | i <- [1 .. nrows g], j <- [1 .. ncols g], g' ! (i, j) /= '.', (i, j) `notMember` loop]
+          out        = bfs (singleton (0, 0)) [(0, 0)] 
+          final      = foldr (setElem 'O') g'' . filter inGrid $ toList out
+          bfs v []         = v
+          bfs v (el:queue) = bfs v' queue'
+            where neighbours = filter (`notMember` v) $ getNeighboursOutOfLoop el g''
+                  v'         = foldr  insert v neighbours
+                  queue'     = queue ++ neighbours
+
 -- Bonus round: print the map with O for the outside part of the loop and I for the enclosed part :)
-bonusRound :: Input -> IO ()
-bonusRound input = putStr g''
+printFinal :: Input -> IO ()
+printFinal input = putStrLn g''
     where (inside, g) = getInsideOfLoop input
           g'          = foldr (setElem 'I') g $ toList inside
           g''         = concatMap ((++ "\n") . map go) $ toLists g'
@@ -141,7 +183,10 @@ compute :: Input -> String -> IO ()
 compute input "parse" = print input
 compute input "one"   = print . partOne $ input
 compute input "two"   = print . partTwo $ input
-compute input "bonus" = bonusRound input
+compute input "loop"  = printLoop input
+compute input "border"= printBorder input
+compute input "out"   = printOutside input
+compute input "print" = printFinal input
 compute input _       = error "Unknown part"
 
 main = do
