@@ -466,13 +466,13 @@ Now, to get the part that is furthest from the start in the loop, I simply have 
 This is the part that was the most difficult. My initial idea was to simply cover every tile outside of the loop and subtract the number of total tiles by the number of tiles outside.
 This would have worked if we didn't have to be able to squeeze through pipes.
 
-A good idea here would have been to look at the (Even Odd rule.)[https://en.wikipedia.org/wiki/Even–odd_rule] Unfortunately I wasn't so smart lol.
+A good idea here would have been to look at the [Even Odd rule](https://en.wikipedia.org/wiki/Even–odd_rule). Unfortunately I wasn't so smart lol.
 
 So here is my idea instead:
 
 ### Step 0:
 
-I replace every non-loop pipe tile with a '.' on my grid. This is actually pretty slow (like 0.8s). I have made (a bonus version)[./Day_10_bonus.hs] that doesn't use that.
+I replace every non-loop pipe tile with a '.' on my grid. This is actually pretty slow (like 0.8s). I have made [a bonus version](./Day_10_bonus.hs) that doesn't use that.
 
 ### Step 1:
 
@@ -512,7 +512,7 @@ Here it is quite obvious that the outside part of my loop is on the left side (a
 
 ### Step 2:
 
-Despite that I am pretty much always guaranted to have the left side as the outside part of the loop, I want to be safe and check that this is the case. To do so, I want to cover the outside of the loop (without squeezing through pipes). For this, I simply walk in a (Breadth First way)[https://en.wikipedia.org/wiki/Breadth-first_search] starting from a point that is guaranted to be outside of the loop.
+Despite that I am pretty much always guaranted to have the left side as the outside part of the loop, I want to be safe and check that this is the case. To do so, I want to cover the outside of the loop (without squeezing through pipes). For this, I simply walk in a [Breadth First way](https://en.wikipedia.org/wiki/Breadth-first_search) starting from a point that is guaranted to be outside of the loop.
 
 By the way, here is an input tha doesn't have the enclosed side on the right side:
 ```
