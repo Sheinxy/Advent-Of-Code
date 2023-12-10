@@ -79,7 +79,7 @@ getNeighboursOutOfLoop pos@(r, c) grid = filter ((== '.') . getWithDefault grid)
 
 -- Follow the loop to get the bordering tiles in the form of (Left bordering tiles, Right bordering tiles): imagine you start at a straight line, you go east, and you keep record of everything on your left and on your right.
 followLoop :: Matrix Char -> Set (Int, Int) -> (Set (Int, Int), Set (Int, Int))
-followLoop grid loop | null straights = (empty, empty)                                          -- If there is (somehow) no '-' tile, then there cannot be any loop with enclosed parts.
+followLoop grid loop | null straights = (empty, empty)                                          -- If there is (somehow) no '-' tile, then there cannot be any loop with enclosed parts. (Well actually there could be, but due to the size of the input it's pretty unlikely)
                      | otherwise      = both (S.filter ((== '.') . getWithDefault grid)) border -- Only keep the borders that are not part of the loop (so for example .||, the middle tile only as the left .)
     where straights     = S.filter ((== '-') . (grid !)) loop
           line@(r, c)   = head . toList $ straights
