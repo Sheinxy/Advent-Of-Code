@@ -36,15 +36,15 @@ getNeighbours pos@(r, c) grid = filter ((/= '.') . (grid !)) neighbours
           cols = ncols grid
           char = grid ! pos
           inGrid (row, col) = 0 < row && row <= rows && 0 < col && col <= cols
-          -- S is a bit peculiar: we need to make sure that its neighbours are actually accessible
-          neighboursOf 'S'  = map snd . filter (not . fst) $ zipWith (\f v -> (f $ getWithDefault grid v, v)) [blockUp, blockDown, blockLeft, blockRight] 
-                                                                                                              [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
-          neighboursOf 'F'  = [(r + 1, c), (r, c + 1)]
-          neighboursOf '7'  = [(r + 1, c), (r, c - 1)]
-          neighboursOf 'J'  = [(r - 1, c), (r, c - 1)]
-          neighboursOf 'L'  = [(r - 1, c), (r, c + 1)]
-          neighboursOf '-'  = [(r, c - 1), (r, c + 1)]
-          neighboursOf '|'  = [(r - 1, c), (r + 1, c)]
+          isAccessible  f p = (f $ getWithDefault grid p, p)
+          getAccessible fs  = map snd . filter (not . fst) . zipWith isAccessible fs
+          neighboursOf 'S'  = getAccessible [blockUp  , blockDown, blockLeft, blockRight] [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+          neighboursOf 'F'  = getAccessible [blockDown, blockRight] [(r + 1, c), (r, c + 1)]
+          neighboursOf '7'  = getAccessible [blockDown, blockLeft ] [(r + 1, c), (r, c - 1)]
+          neighboursOf 'J'  = getAccessible [blockUp  , blockLeft ] [(r - 1, c), (r, c - 1)]
+          neighboursOf 'L'  = getAccessible [blockUp  , blockRight] [(r - 1, c), (r, c + 1)]
+          neighboursOf '-'  = getAccessible [blockLeft, blockRight] [(r, c - 1), (r, c + 1)]
+          neighboursOf '|'  = getAccessible [blockUp  , blockDown ] [(r - 1, c), (r + 1, c)]
           neighbours        = filter inGrid . neighboursOf $ char
 
 -- Simple DFS traversal to get the loop
