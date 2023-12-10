@@ -470,6 +470,10 @@ A good idea here would have been to look at the (Even Odd rule.)[https://en.wiki
 
 So here is my idea instead:
 
+### Step 0:
+
+I replace every non-loop pipe tile with a '.' on my grid. This is actually pretty slow (like 0.8s). I have made (a bonus version)[./Day_10_bonus.hs] that doesn't use that.
+
 ### Step 1:
 
 I walk alongside the loop and I keep track of tiles that are on my left side and on my right side (with regards to the direction I am heading towards. For example, if I am heading Eastbound, the my left side is North and my right side is South). I keep track of both sides on two different lists.
@@ -509,6 +513,17 @@ Here it is quite obvious that the outside part of my loop is on the left side (a
 ### Step 2:
 
 Despite that I am pretty much always guaranted to have the left side as the outside part of the loop, I want to be safe and check that this is the case. To do so, I want to cover the outside of the loop (without squeezing through pipes). For this, I simply walk in a (Breadth First way)[https://en.wikipedia.org/wiki/Breadth-first_search] starting from a point that is guaranted to be outside of the loop.
+
+By the way, here is an input tha doesn't have the enclosed side on the right side:
+```
+..F7......
+..||......
+..|L7.....
+..|.S.....
+..L-J.....
+```
+
+Hence why this flood fill is necessary!
 
 I choose the point (0, 0) as that starting point, as my grid starts at (1, 1), therefore this point cannot be enclosed. I also "extend" my grid by one tile on each side to make sure that I get every side of the loop (in fact, I also did this while searching for the borders)
 
