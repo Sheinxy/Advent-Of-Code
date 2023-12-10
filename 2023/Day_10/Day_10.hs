@@ -79,7 +79,7 @@ getNeighboursOutOfLoop pos@(r, c) grid = filter ((== '.') . getWithDefault grid)
 
 -- Follow the loop to get the bordering tiles in the form of (Left bordering tiles, Right bordering tiles): imagine you start at a straight line, you go east, and you keep record of everything on your left and on your right.
 followLoop :: Matrix Char -> Set (Int, Int) -> (Set (Int, Int), Set (Int, Int))
-followLoop grid loop | null straights = (empty, empty)                                          -- If there is (somehow) no '-' tile, then there cannot be any loop.
+followLoop grid loop | null straights = (empty, empty)                                          -- If there is (somehow) no '-' tile, then there cannot be any loop with enclosed parts.
                      | otherwise      = both (S.filter ((== '.') . getWithDefault grid)) border -- Only keep the borders that are not part of the loop (so for example .||, the middle tile only as the left .)
     where straights     = S.filter ((== '-') . (grid !)) loop
           line@(r, c)   = head . toList $ straights
@@ -112,8 +112,8 @@ followLoop grid loop | null straights = (empty, empty)                          
 getInsideOfLoop :: Input -> (Set (Int, Int), Matrix Char)
 getInsideOfLoop input@(s, g) = (inside, g'')
     where loop       = fromList $ getLoop input
-          g'         = setElem (getType g s) s g                                                                           -- Changing S to its actual type
-          g''        = foldr (setElem '.') g' [(i, j) | i <- [1 .. nrows g], j <- [1 .. ncols g], (i, j) `notMember` loop] -- Stripping non loop elements from the grid (replacing them by .)
+          g'         = setElem (getType g s) s g -- Changing S to its actual type
+          g''        = foldr (setElem '.') g' [(i, j) | i <- [1 .. nrows g], j <- [1 .. ncols g], g' ! (i, j) /= '.', (i, j) `notMember` loop] -- Stripping non loop elements from the grid (replacing them by .)
           out        = bfs (singleton (0, 0)) [(0, 0)] -- Starting from (0, 0), which is outside the grid, recovering the outside part of the loop that doesn't require squeezing through pipes.
           (l, r)     = followLoop g'' loop             -- Follow the loop to get the left and right borders. One is part of the inside, the other is part of the outside.
           insideBorder | disjoint out l = toList l     -- If no element from the outside is present on the left border, then the left border is part of the inside
