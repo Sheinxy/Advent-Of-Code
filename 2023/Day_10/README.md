@@ -466,7 +466,7 @@ Now, to get the part that is furthest from the start in the loop, I simply have 
 This is the part that was the most difficult. My initial idea was to simply cover every tile outside of the loop and subtract the number of total tiles by the number of tiles outside.
 This would have worked if we didn't have to be able to squeeze through pipes.
 
-A good idea here would have been to look at the (even-odd rule)[https://en.wikipedia.org/wiki/Even–odd_rule]. Unfortunately I wasn't so smart lol.
+A good idea here would have been to look at the (even-odd rule.)[https://en.wikipedia.org/wiki/Even–odd_rule] Unfortunately I wasn't so smart lol.
 
 So here is my idea instead:
 
