@@ -466,7 +466,7 @@ Now, to get the part that is furthest from the start in the loop, I simply have 
 This is the part that was the most difficult. My initial idea was to simply cover every tile outside of the loop and subtract the number of total tiles by the number of tiles outside.
 This would have worked if we didn't have to be able to squeeze through pipes.
 
-A good idea here would have been to look at the (even-odd rule.)[https://en.wikipedia.org/wiki/Even–odd_rule] Unfortunately I wasn't so smart lol.
+A good idea here would have been to look at the (Even Odd rule.)[https://en.wikipedia.org/wiki/Even–odd_rule] Unfortunately I wasn't so smart lol.
 
 So here is my idea instead:
 
@@ -508,7 +508,7 @@ Here it is quite obvious that the outside part of my loop is on the left side (a
 
 ### Step 2:
 
-Despite that I am pretty much always guaranted to have the left side as the outside part of the loop, I want to be safe and check that this is the case. To do so, I want to cover the outside of the loop (without squeezing through pipes). For this, I simply walk in a (breadth-first way)[https://en.wikipedia.org/wiki/Breadth-first_search] starting from a point that is guaranted to be outside of the loop.
+Despite that I am pretty much always guaranted to have the left side as the outside part of the loop, I want to be safe and check that this is the case. To do so, I want to cover the outside of the loop (without squeezing through pipes). For this, I simply walk in a (Breadth First way)[https://en.wikipedia.org/wiki/Breadth-first_search] starting from a point that is guaranted to be outside of the loop.
 
 I choose the point (0, 0) as that starting point, as my grid starts at (1, 1), therefore this point cannot be enclosed. I also "extend" my grid by one tile on each side to make sure that I get every side of the loop (in fact, I also did this while searching for the borders)
 
