@@ -46,7 +46,7 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input)  $ init args 
+    mapM (compute input) $  init args 
 EOF
 `
 
