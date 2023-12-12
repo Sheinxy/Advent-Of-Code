@@ -2,7 +2,7 @@ module Main where
 
 import Data.List (intercalate)
 import Data.Maybe (isJust, fromJust)
-import Data.Map hiding (map, filter)
+import Data.Map hiding (map)
 import qualified Data.Map as M (lookup)
 import Data.Tuple.Extra ((***))
 import System.Environment
@@ -24,9 +24,9 @@ updateMemo m k v = (insert k v m, v)
 
 -- Compute the number of possible arrangements with a cache
 computeWithMemo :: Memo -> Key -> (Memo, Int)
-computeWithMemo m k | isJust r = (m, fromJust r) where r = M.lookup k m                         -- Cached result
+computeWithMemo m k@(n, s, g) | isJust r = (m, fromJust r) where r = M.lookup k m         -- Cached result
 
-computeWithMemo m k@(n, c:_, _)  | n > c = updateMemo m k 0                                      -- Invalid arrangement: current block is too big
+computeWithMemo m k@(n, c:_, _)  | n > c = updateMemo m k 0                               -- Invalid arrangement: current block is too big
 
 computeWithMemo m k@(0, [ ], xs) | all (`elem` "?.") xs           = updateMemo m k 1      -- Valid arrangement: end of groups
 computeWithMemo m k@(_, [ ], xs) | '#'  `elem`       xs           = updateMemo m k 0      -- Invalid arrangement: more blocks but no more groups
