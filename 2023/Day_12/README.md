@@ -124,7 +124,7 @@ The idea being:
  - When I find a . that doesn't follow a block, I just keep scanning further.
  - When I find a ?, I consider both cases where it is a '.' and a '#'. The number of valid arrangements for the '?' is the sum of valid arrangements for the '.' case and the '#' case.
 
- ### Part 2: oh no, this is slow (aka memoization)
+### Part 2: oh no, this is slow (aka memoization)
 
 Sadly, this bruteforce solution has a small problem:
   - Some states might get recomputed, multiple times.
