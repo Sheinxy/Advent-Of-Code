@@ -1,5 +1,6 @@
 module Main where
 
+import Control.Parallel.Strategies
 import Data.List (intercalate)
 import Data.Maybe (isJust, fromJust)
 import Data.Map hiding (map)
@@ -51,10 +52,19 @@ partOne = sum . map (\(s, g) -> snd . computeWithMemo empty $ (0, s, g))
 partTwo :: Input -> Output
 partTwo = partOne . map (intercalate "?" . replicate 5 *** concat . replicate 5)
 
+-- Bonus: parallelization goes brrrrrrrrrrrr
+bonusOne :: Input -> Output
+bonusOne = sum . parMap rseq (snd . computeWithMemo empty) . map (\(s, g) -> (0, s, g))
+
+bonusTwo :: Input -> Output
+bonusTwo = bonusOne . map (intercalate "?" . replicate 5 *** concat . replicate 5)
+
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
 compute input "one"   = print . partOne $ input
 compute input "two"   = print . partTwo $ input
+compute input "bone"  = print . bonusOne $ input
+compute input "btwo"  = print . bonusTwo $ input
 compute input _       = error "Unknown part"
 
 main = do
