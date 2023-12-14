@@ -106,7 +106,7 @@ And voilà! I have made every rock on the row slide westbound! Now rince and rep
 
 ### But... I wanted to slide north :C
 
-When you think about it, directions are just a question of perspective. Sliding North is the same thing as sliding East but looking at the world with your head titlted 90 degrees right!
+When you think about it, directions are just a question of perspective. Sliding North is the same thing as sliding East but looking at the world with your head titlted 90 degrees left!
 
 So if we can somehow rotate the world, we simply need to rotate once, slide East, and rotate once in the opposite direction!
 
