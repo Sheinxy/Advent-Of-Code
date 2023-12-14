@@ -93,13 +93,13 @@ Into:
 Now, for each chunk of my row, I simply sort to group every rock on one side and every . on the other!
 
 ```
-["OOO..", "O...", "."]
+["..OOO", "...O", "."]
 ```
 
 Now that I have my chunks, I can join them back together with cube rocks!
 
 ```
-"OOO..#O...#."
+"..OOO#...O#."
 ```
 
 And voilà! I have made every rock on the row slide westbound! Now rince and repeat for every row and it's done!
