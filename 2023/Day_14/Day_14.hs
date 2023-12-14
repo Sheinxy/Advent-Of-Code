@@ -2,7 +2,7 @@
 module Main where
 
 import Data.Map (Map, insert, empty, member, (!))
-import Data.List (foldl', transpose, replicate, intercalate)
+import Data.List (foldl', transpose, sort, intercalate)
 import Data.List.Split (splitOn)
 import System.Environment
 
@@ -29,11 +29,10 @@ slide East  = rotate180 . slide West . rotate180
 slide South = rotateN90 . slide West . rotate90
 slide North = rotate90  . slide West . rotateN90 
 slide West  = map slideRow
-    where slideRow     = intercalate "#" . map makeRow . splitOn "#"
-          makeRow row  = replicate (length . filter (== 'O') $ row) 'O' ++ replicate (length . filter (== '.') $ row) '.'
+    where slideRow = intercalate "#" . map (reverse . sort) . splitOn "#"
 
 getLoad :: Input -> Output
-getLoad world = sum [length world - i | (i, row) <- zip [0 .. ] world, char <- row, char == 'O']
+getLoad world = sum [i | (i, row) <- zip [1 .. ] (reverse world), char <- row, char == 'O']
 
 partOne :: Input -> Output
 partOne = getLoad . slide North
@@ -54,8 +53,9 @@ partTwo world | 1_000_000_000 <= start cycle = values cycle !! 1_000_000_000 -- 
 
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
-compute input "one"   = print . partOne $ input
-compute input "two"   = print . partTwo $ input
+compute input "one"   = print . partOne   $ input
+compute input "two"   = print . partTwo   $ input
+compute input "cycle" = print . findCycle $ input
 compute input _       = error "Unknown part"
 
 main = do
