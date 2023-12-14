@@ -25,11 +25,11 @@ rotateN90 :: Input -> Input
 rotateN90 = rotate180 . rotate90
 
 slide :: Direction -> Input -> Input
-slide East  = rotate180 . slide West . rotate180
-slide South = rotateN90 . slide West . rotate90
-slide North = rotate90  . slide West . rotateN90 
-slide West  = map slideRow
-    where slideRow = intercalate "#" . map (reverse . sort) . splitOn "#"
+slide West  = rotate180 . slide East . rotate180
+slide South = rotate90  . slide East . rotateN90
+slide North = rotateN90 . slide East . rotate90 
+slide East  = map slideRow
+    where slideRow = intercalate "#" . map sort . splitOn "#"
 
 getLoad :: Input -> Output
 getLoad world = sum [i | (i, row) <- zip [1 .. ] (reverse world), char <- row, char == 'O']
