@@ -19,7 +19,7 @@ rotate90 :: Input -> Input
 rotate90 = map reverse . transpose
 
 rotate180 :: Input -> Input
-rotate180 = map (reverse) . reverse
+rotate180 = map reverse . reverse
 
 rotateN90 :: Input -> Input
 rotateN90 = rotate180 . rotate90
@@ -148,7 +148,7 @@ rotate180 = rotate90 . rotate90
 
 -- UPDATED:
 rotate180 :: Input -> Input
-rotate180 = map (reverse) . reverse
+rotate180 = map reverse . reverse
 ```
 -> 
 ```
