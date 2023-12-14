@@ -18,7 +18,7 @@ getMirrorDiffs row = map (length . filter not) . zipWith (zipWith (==)) starts $
 
 getMirrorRow :: Int -> [String] -> Int
 getMirrorRow smudges row = 1 + fromMaybe (-1) (smudges `elemIndex` results) -- Find the row number that has the right number of smudges
-           where results = map sum . (transpose . map getMirrorDiffs) $ row -- Number of smudges for each vertical line row number
+           where results = map sum . transpose . map getMirrorDiffs $ row -- Number of smudges for each vertical line row number
 
 solve :: Int -> Input -> Output
 solve n grids = sum [getMirrorRow n g + 100 * (getMirrorRow n . transpose $ g) | g <- grids]
