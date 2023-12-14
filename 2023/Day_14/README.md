@@ -6,11 +6,6 @@ I kept working more on my solution to reduce that time to around 2s afterwards b
 I am only going to detail that faster solution here (but worry not, both solutions are pretty much the same, just one has easier data structures to handle and runs faster :D)
 
 ```hs
-import Data.Map (Map, insert, empty, member, (!))
-import Data.List (foldl', transpose, replicate, intercalate)
-import Data.List.Split (splitOn)
-import System.Environment
-
 data Direction = North | West | South | East deriving (Eq)
 data Cycle     = Cycle { start :: Int, values :: [Int] } deriving (Show)
 
@@ -30,11 +25,11 @@ rotateN90 :: Input -> Input
 rotateN90 = rotate180 . rotate90
 
 slide :: Direction -> Input -> Input
-slide East  = rotate180 . slide West . rotate180
-slide South = rotateN90 . slide West . rotate90
-slide North = rotate90  . slide West . rotateN90 
-slide West  = map slideRow
-    where slideRow = intercalate "#" . map (reverse . sort) . splitOn "#"
+slide West  = rotate180 . slide East . rotate180
+slide South = rotate90  . slide East . rotateN90
+slide North = rotateN90 . slide East . rotate90 
+slide East  = map slideRow
+    where slideRow = intercalate "#" . map sort . splitOn "#"
 
 getLoad :: Input -> Output
 getLoad world = sum [i | (i, row) <- zip [1 .. ] (reverse world), char <- row, char == 'O']
@@ -74,13 +69,13 @@ I basically keep the input as is! (Well I keep it as a list of rows)
 
 The core gimmick of this puzzle is to slide round rocks around the map. Part two requires to slide them in multiple direction, part one requires to slide them only north.
 
-I claim that the easiet direction to slide rocks towards is West, so let's focus on that first!
+I claim that the easiet direction to slide rocks towards is East, so let's focus on that first!
 
-### Sliding West
+### Sliding East
 
 ```hs
-slide West  = map slideRow
-    where slideRow = intercalate "#" . map (reverse . sort) . splitOn "#"
+slide East  = map slideRow
+    where slideRow = intercalate "#" . map sort . splitOn "#"
 ```
 
 In order to slide my whole map West, I can simply slide each row individually! This is due to the fact that rocks only slide alongside their current row, therefore they are not impacted by what happens to the other rows!
@@ -95,7 +90,7 @@ Into:
 ["O.O.O", "..O.", "."]
 ```
 
-Now, for each chunk of my row, I simply sort to group every rock on one side and every . on the other! (Note that I reverse the chunks because '.' and before 'O')
+Now, for each chunk of my row, I simply sort to group every rock on one side and every . on the other!
 
 ```
 ["OOO..", "O...", "."]
@@ -111,9 +106,9 @@ And voilà! I have made every rock on the row slide westbound! Now rince and rep
 
 ### But... I wanted to slide north :C
 
-When you think about it, directions are just a question of perspective. Sliding north is the same thing as sliding north but looking at the world with your head titlted 90 degrees right!
+When you think about it, directions are just a question of perspective. Sliding North is the same thing as sliding East but looking at the world with your head titlted 90 degrees left!
 
-So if we can somehow rotate the world, we simply need to rotate once, slide west, and rotate once in the opposite direction!
+So if we can somehow rotate the world, we simply need to rotate once, slide East, and rotate once in the opposite direction!
 
 Let's look at the rotation problem then:
 
@@ -143,7 +138,7 @@ rotate90 :: Input -> Input
 rotate90 = map reverse . transpose
 ```
 
-Now, the problem here is that rotating the grid 90 degrees to the right would make our North become East instead of becoming West. One simple way to solve that: rotate more!
+Now, the problem here is still present for rotating south and west. The solution: rotate more!
 
 In fact, let's first rotate once more to get a 180 rotation, and once again to get a negative 90 rotation!
 
@@ -169,13 +164,13 @@ BF
 AE
 ```
 
-And now, sliding in other directions is simply rotation one way, sliding West, and rotation the other way!
+And now, sliding in other directions is simply rotation one way, sliding East, and rotation the other way!
 
 ```hs
 slide :: Direction -> Input -> Input
-slide East  = rotate180 . slide West . rotate180
-slide South = rotateN90 . slide West . rotate90
-slide North = rotate90  . slide West . rotateN90 
+slide West  = rotate180 . slide East . rotate180
+slide South = rotate90  . slide East . rotateN90
+slide North = rotateN90 . slide East . rotate90 
 ```
 
 ## Getting the load
