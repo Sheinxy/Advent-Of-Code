@@ -18,28 +18,28 @@ parseInput = fromLists . lines
 
 -- Will clean that up later maybe
 getNexts :: Move -> Input -> [Move]
-getNexts (Move (r, c) North) grid | char `elem` ".|" = [Move (r - 1, c     )  North]
-                                  | char == '/'      = [Move (r    , c + 1 )  East ]
-                                  | char == '\\'     = [Move (r    , c - 1 )  West ]
-                                  | char == '-'      = [Move (r    , c - 1 )  West, Move (r, c + 1) East]
+getNexts (Move (r, c) North) grid | char `elem` ".|" = [Move (r - 1, c    ) North]
+                                  | char == '/'      = [Move (r    , c + 1) East ]
+                                  | char == '\\'     = [Move (r    , c - 1) West ]
+                                  | char == '-'      = [Move (r    , c - 1) West, Move (r, c + 1) East]
                                   where char = grid ! (r, c)
 
-getNexts (Move (r, c) South) grid | char `elem` ".|" = [Move (r + 1, c     ) South ]
-                                  | char == '\\'     = [Move (r    , c + 1 )  East ]
-                                  | char == '/'      = [Move (r    , c - 1 )  West ]
-                                  | char == '-'      = [Move (r    , c - 1 ) West, Move (r , c + 1) East]
+getNexts (Move (r, c) South) grid | char `elem` ".|" = [Move (r + 1, c    ) South ]
+                                  | char == '\\'     = [Move (r    , c + 1) East  ]
+                                  | char == '/'      = [Move (r    , c - 1) West  ]
+                                  | char == '-'      = [Move (r    , c - 1) West, Move (r , c + 1) East]
                                   where char = grid ! (r, c)
 
-getNexts (Move (r, c) East) grid  | char `elem` ".-" = [Move (r    , c + 1    ) East ]
-                                  | char == '\\'     = [Move (r + 1, c        ) South ]
-                                  | char == '/'      = [Move (r - 1, c        ) North ]
-                                  | char == '|'      = [Move (r - 1, c        ) North, Move (r + 1, c) South]
+getNexts (Move (r, c) East) grid  | char `elem` ".-" = [Move (r    , c + 1) East  ]
+                                  | char == '\\'     = [Move (r + 1, c    ) South ]
+                                  | char == '/'      = [Move (r - 1, c    ) North ]
+                                  | char == '|'      = [Move (r - 1, c    ) North, Move (r + 1, c) South]
                                   where char = grid ! (r, c)
 
-getNexts (Move (r, c) West) grid  | char `elem` ".-" = [Move (r    , c - 1    ) West  ]
-                                  | char == '\\'     = [Move (r - 1, c        ) North ]
-                                  | char == '/'      = [Move (r + 1, c        ) South ]
-                                  | char == '|'      = [Move (r - 1, c        ) North, Move (r + 1, c) South]
+getNexts (Move (r, c) West) grid  | char `elem` ".-" = [Move (r    , c - 1) West  ]
+                                  | char == '\\'     = [Move (r - 1, c    ) North ]
+                                  | char == '/'      = [Move (r + 1, c    ) South ]
+                                  | char == '|'      = [Move (r - 1, c    ) North, Move (r + 1, c) South]
                                   where char = grid ! (r, c)
 
 bfs :: Set Move -> [Move] -> Input -> Int
