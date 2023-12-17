@@ -93,8 +93,8 @@ Then, we create the different states by getting the new position and the new num
     - If our current state is Move (4, 5) North 1, then we get the states [Move (3, 5) North 2, Move (4, 6) East 1, Move (4, 4) West 1]
 
 We remove any invalid state. A state is invalid if:
-    - The maximum number of consecutive moves in that direction has been surpassed
-    - Or if we're trying to go back to the starting tile (which isn't invalid per se, just useless to do)
+ - The maximum number of consecutive moves in that direction has been surpassed
+ - Or if we're trying to go back to the starting tile (which isn't invalid per se, just useless to do)
 
 Now the last check we do is:
  - Were we already moving in a direction, and should we keep going?
@@ -137,11 +137,11 @@ findMinHeatLoss min max grid = fst . fromJust . aStar getNexts getCost heuristic
 ```
 
 The library's aStar function takes 5 arguments:
-    - The function to generate list of neighboring states given the current state: our getNeighbours, to which I associate a bound checking to keep our neighbours in the grid)
-    - The function to generate transition costs between neighboring states: here the cost is the value of the next position in the grid. the cost doesn't really depend on the current state
-    - The estimate on remaining cost given a state AKA our heuristic: here our heuristic is that the cost of a position is the taxicab distance to go to our end target from that position. (basically, assume that all costs are equal)
-    - The predicate to determine if solution found: is the current state position our end target, and did we get here in a valid number of consecutive steps?
-    - The initial state: Move (1, 1) East 0. Out initial position is (1, 1) as it is the top left corner of the grid. Our initial direction is East as it allows us to move either East or South and our number of consecutive moves Eastbounds is 0 as we have yet to move.
+ - The function to generate list of neighboring states given the current state: our getNeighbours, to which I associate a bound checking to keep our neighbours in the grid)
+ - The function to generate transition costs between neighboring states: here the cost is the value of the next position in the grid. the cost doesn't really depend on the current state
+ - The estimate on remaining cost given a state AKA our heuristic: here our heuristic is that the cost of a position is the taxicab distance to go to our end target from that position. (basically, assume that all costs are equal)
+ - The predicate to determine if solution found: is the current state position our end target, and did we get here in a valid number of consecutive steps?
+ - The initial state: Move (1, 1) East 0. Out initial position is (1, 1) as it is the top left corner of the grid. Our initial direction is East as it allows us to move either East or South and our number of consecutive moves Eastbounds is 0 as we have yet to move.
 
 Calling the aStar function with those arguments yields a tuple (wrapped around a Maybe monad, in case the search didn't find a result, which is a case we don't care about here so we unwrap it with fromJust):
  - The total distance to go from initial state to target state: ie the answer to our puzzle
