@@ -103,7 +103,7 @@ If that is the case (ie the minimum number of consecutive moves in that directio
 
 With that done, we now have a function taking a current state and returnin the next accessible states!
 
-## [Jump Up, Super AStar](https://www.youtube.com/watch?v=1bZtCt_Siro)
+## [Jump Up, Super AStar](https://www.youtube.com/watch?v=1bZtCt_Siro):
 
 All of that is cool, but we're yet to have solved anything... 😽
 
