@@ -31,7 +31,8 @@ addDirection West  = second (-1 +)
 getNeighbours :: Int -> Int -> Move -> [Move]
 getNeighbours min max (Move pos dir consec) | mustKeepDirection = filter ((== dir) . direction) neighbours 
                                             | otherwise         = neighbours
-                   where neighbours = filter ((<= max) . consecutive)                       . -- Do not try moves that would imply moving too much in one direction
+                   where neighbours = filter ((/= (1, 1)) . position)                       . -- Do not go back to the starting point, Ever. It is useless. Bad boy.
+                                      filter ((<= max)    . consecutive)                    . -- Do not try moves that would imply moving too much in one direction
                                       map (\x -> Move (addDirection x pos) x (newConsec x)) . -- Get the move state (position, direction and number of consecutive moves)
                                       filter (/= opposite dir) $ [North, South, East, West]   -- Try moves in all possible directions, excepting reverse
 
