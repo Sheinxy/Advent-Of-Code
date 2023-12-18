@@ -13,7 +13,7 @@ Watch me code in Haskell for 25 days straight
 |  [Day 06](./Day_06)	|    ✅   	|    ✅    	|  [Day 15](./Day_15)	|    ✅     |    ✅    	|  [Day 24](./Day_24)	|        	|        	|
 |  [Day 07](./Day_07)	|    ✅    	|    ✅    	|  [Day 16](./Day_16)	|    ✅     |    ✅    	|  [Day 25](./Day_25)	|        	|        	|
 |  [Day 08](./Day_08)	|    ✅    	|    ✅    	|  [Day 17](./Day_17)	|    ✅     |    ✅    	|     	|        	|        	|
-|  [Day 09](./Day_09)	|    ✅    	|    ✅    	|  [Day 18](./Day_18)	|         	|        	|     	|        	|        	|
+|  [Day 09](./Day_09)	|    ✅    	|    ✅    	|  [Day 18](./Day_18)	|    ✅    	|    ✅     |     	|        	|        	|
 
 ---
 
@@ -80,4 +80,7 @@ Spent 20 minutes debugging. Didn't notice I swapped north and south somewhere.
 ### [Day 17](./Day_17)
 Please lord have mercy on my sould and stop giving me puzzles involving 2D grids.
 
-Also, I was definitely not recoding an A* or a Dijkstra on the stop. No can do.
+Also, I was definitely not recoding an A\* or a Dijkstra on the stop. No can do.
+
+### [Day 18](./Day_18)
+This is simply computing an area. Nothing more!
