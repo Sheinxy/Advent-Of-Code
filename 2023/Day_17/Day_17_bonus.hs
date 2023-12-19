@@ -52,10 +52,10 @@ findMinHeatLoss lo hi grid = fst . fromJust . aStar getNexts getCost heuristic i
           getCost (Move (r1, c1) _) (Move (r2, c2) _) | r1 == r2  = sum $ map (grid !) [(r1, c) | c <- [min c1 c2 .. max c1 c2], c /= c1]
                                                       | otherwise = sum $ map (grid !) [(r, c1) | r <- [min r1 r2 .. max r1 r2], r /= r1]
 
---partOne :: Input -> Output
+partOne :: Input -> Output
 partOne = findMinHeatLoss 1 3
 
---partTwo :: Input -> Output
+partTwo :: Input -> Output
 partTwo = findMinHeatLoss 4 10
 
 compute :: Input -> String -> IO ()
