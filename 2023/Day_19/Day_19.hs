@@ -5,9 +5,9 @@ import Data.List.Extra (replace)
 import Data.Tuple.Extra ((***))
 import System.Environment
 
-data Ratings   = Ratings { x :: Int, m :: Int, a :: Int, s :: Int } deriving (Read)
-data Rule      = Rule { condition :: Condition, ifTrue :: String }
-data Condition = Condition { operation :: Int -> Bool, field :: Char }
+data Ratings   = Ratings   { x :: Int, m :: Int, a :: Int, s :: Int    } deriving (Read)
+data Rule      = Rule      { condition :: Condition, ifTrue  :: String }
+data Condition = Condition { operation :: Int -> Bool, field :: Char   }
 
 type Input  = (Map String [Rule], [Ratings])
 type Output = Int
