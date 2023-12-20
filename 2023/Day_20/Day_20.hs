@@ -1,7 +1,7 @@
 module Main where
 
 import Data.Map (Map, fromList, (!), adjust, elems, empty, keys, insert, member, notMember)
-import Data.List (find)
+import Data.List (find, intercalate, stripPrefix)
 import Data.Maybe (fromJust)
 import System.Environment
 
@@ -74,9 +74,11 @@ doIteration ((sender, name, pulse):queue)  it | name `notMember` modules it     
 doNextIteration :: Iteration -> Iteration
 doNextIteration (Iteration it n c _ _) = doIteration [("button", "broadcaster", Low)] (Iteration it (n + 1) c 1 0)
 
+doNIterations :: Int -> Input -> [Iteration]
+doNIterations n input = take n . tail . iterate doNextIteration $ Iteration input 0 empty 0 0
+
 partOne :: Input -> Output
-partOne input = (sum . map lows) iterations * (sum . map highs) iterations
-    where iterations = take 1000 . tail . iterate doNextIteration $ Iteration input 0 empty 0 0
+partOne input = (sum . map lows) iterations * (sum . map highs) iterations where iterations = doNIterations 1000 input
 
 partTwo :: Input -> Output
 partTwo input = foldr1 lcm . elems $ cycling iterations
@@ -84,10 +86,24 @@ partTwo input = foldr1 lcm . elems $ cycling iterations
           allFound it = all (`elem` (keys $ cycling it)) mustBeHigh
           iterations  = head . dropWhile (not . allFound) . tail . iterate doNextIteration $ Iteration input 0 empty 0 0
 
+graphOfModules :: Map String Module -> String
+graphOfModules modules = "digraph {\n\trx [fillcolor=fuchsia style=filled shape=box];\n" ++ go (keys modules) ++ "}"
+    where go []   = ""
+          go (x:xs) = nodeStr ++ go xs
+            where nodeStr | Broadcaster c <- modules ! x = "\tbroadcaster [fillcolor=gold2 style=filled shape=diamond];\n\tbroadcaster -> {" ++ intercalate " " c ++ "};\n"
+                          | Flip On     c <- modules ! x = "\t" ++ x ++ " [fillcolor=green style=filled shape=ellipse];\n\t" ++ x ++ " -> {" ++ intercalate " " c ++ "};\n"
+                          | Flip Off    c <- modules ! x = "\t" ++ x ++ " [fillcolor=red   style=filled shape=ellipse];\n\t" ++ x ++ " -> {" ++ intercalate " " c ++ "};\n"
+                          | Conjunction a c <- modules ! x  = str a c 
+                            where str a c | all (== High) (elems a) = "\t" ++ x ++ " [fillcolor=red     style=filled shape=hexagon];\n\t" ++ x ++ " -> {" ++ intercalate " " c ++ "};\n"
+                                          | otherwise               = "\t" ++ x ++ " [fillcolor=green   style=filled shape=hexagon];\n\t" ++ x ++ " -> {" ++ intercalate " " c ++ "};\n"
+
+
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
 compute input "one"   = print . partOne $ input
 compute input "two"   = print . partTwo $ input
+compute input  arg    | Just n <- stripPrefix "graph=" arg = putStrLn . graphOfModules . modules . last . doNIterations (read n) $ input
+compute input "graph" = putStrLn . graphOfModules $ input
 compute input _       = error "Unknown part"
 
 main = do
