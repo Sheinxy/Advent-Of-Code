@@ -45,8 +45,8 @@ doIteration ((sender, name, pulse):queue)  it | name `notMember` modules it     
                                               | otherwise                              = doIteration queue' it'
                                               where m = modules it ! name
                                                     -- Update cycle length of inputs of conjunction module connected to rx
-                                                    c'     | pulse /= High || "rx" `notElem` connected m = cycling it
-                                                           | otherwise = insert sender (presses it) (cycling it)
+                                                    c' | pulse /= High || "rx" `notElem` connected m = cycling it
+                                                       | otherwise = insert sender (presses it) (cycling it)
 
                                                     -- Update the module
                                                     m' | isConjunction m = m { inputs = adjust (const pulse) sender (inputs m) }
