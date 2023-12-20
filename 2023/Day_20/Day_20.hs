@@ -24,10 +24,9 @@ isConjunction _                 = False
 parseInput :: String -> Input
 parseInput input  = foldr getInputs modules $ keys modules
     where modules = fromList . map (parseLine . words) . lines $ input
-          getInputs name ms | name `member` ms = foldr (adjust (addInput name) ) ms [child | child <- connected (ms ! name),
+          getInputs name ms = foldr (adjust (addInput name) ) ms [child | child <- connected (ms ! name),
                                                                                              child `member` ms,
                                                                                              isConjunction  (ms ! child)]
-                            | otherwise        = ms
           addInput input m = m { inputs=insert input Low $ inputs m}
           parseLine (name : _ : xs) | head name == '&' = (tail name, Conjunction { inputs=empty, connected=children } )
                                     | head name == '%' = (tail name, Flip        {  state=Off  , connected=children } )
