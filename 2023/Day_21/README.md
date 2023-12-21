@@ -149,8 +149,8 @@ So I have a matrix matY:
 and a matrix matX:
 
 (x0^2 x0 1)
-(x1^2 x1  1)
-(x2^2 x2  1)
+(x1^2 x1 1)
+(x2^2 x2 1)
 
 And I want my matrix coefs:
 (a)
