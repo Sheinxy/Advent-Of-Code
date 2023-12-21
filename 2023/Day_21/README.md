@@ -133,6 +133,7 @@ Well, it is not an exact quadratic equation, but it turns out that, thanks to th
 In order to do that, I simply perform some simple maths:
  - First of all, I get three points that are 65 modulo 131. I choose 65, 196 and 327 (that is half side, half side + side, half side + 2 * side)
  - Next I apply the following maths:
+
 ```
 Basically I want to find a b and c such that
 
