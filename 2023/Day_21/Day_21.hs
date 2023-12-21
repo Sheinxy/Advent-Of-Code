@@ -1,6 +1,7 @@
 module Main where
 
 import Data.Either
+import Data.List (stripPrefix)
 import Data.Matrix
 import Data.NumInstances.Tuple
 import Data.Set (Set, notMember, insert, singleton, size, unions, empty)
@@ -60,10 +61,22 @@ partTwo input = result
           -- Do targetX * coefs and get the result
           result   = round $ (targetX `multStd` coefs) ! (1, 1)
 
+plot :: (Int, Int) -> Input -> String
+plot (width, height) input = unlines rows'
+    where results     = getReachable width input
+          pointHeight = (last results `div` 100 + 1) * 100 `div` (height - 1)
+          getChar row res | res `div` pointHeight == row = 'X'
+                          | otherwise                    = '.'
+          rows        =  [[getChar row res | res <- results] | row <- [0 .. height]]
+          headerRow   = replicate (length results) '-'
+          rows'       = map ('|' :) . reverse $ headerRow : rows
+
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
 compute input "one"   = print . partOne $ input
 compute input "two"   = print . partTwo $ input
+compute input "plot"  = putStrLn . plot (131, 20) $ input
+compute input arg     | Just params <- stripPrefix "plot=" arg = putStrLn . plot (read params) $ input
 compute input _       = error "Unknown part"
 
 main = do
