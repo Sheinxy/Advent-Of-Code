@@ -138,7 +138,7 @@ In order to do that, I simply perform some simple maths:
 Basically I want to find a b and c such that
 
 y0 = ax0^2 + bx0 + c
-y1  = ax1^2 + bx1 + c
+y1 = ax1^2 + bx1 + c
 y2 = ax2^2 + bx2 + c
 
 So I have a matrix matY:
@@ -149,7 +149,7 @@ So I have a matrix matY:
 and a matrix matX:
 
 (x0^2 x0 1)
-(x1 ^2 x1  1)
+(x1^2 x1  1)
 (x2^2 x2  1)
 
 And I want my matrix coefs:
