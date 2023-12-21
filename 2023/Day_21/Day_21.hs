@@ -44,7 +44,7 @@ partTwo input = result
 
           {- Make two matrices: 
                 - a 3x3 matrix where each row is [x ^ 2, x, 1] for each x in our three points
-                - a 1x3 matrix where each row is the number of tiles reachable after x1, x2 and x3
+                - a 3x1 matrix where each row is the number of tiles reachable after x1, x2 and x3
           -}
           matX     = fromLists [map fromIntegral [x ^ 2, x, 1] | x <- xs]
           matY     = fromList 3 1 ys
