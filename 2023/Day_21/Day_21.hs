@@ -55,7 +55,7 @@ partTwo input = result
 
           -- Get the [x^2, x, 1] for the target step count
           target   = 26501365
-          targetX  = fromLists [[target ^ 2, target, 1]]
+          targetX  = fromList 1 3 [target ^ 2, target, 1]
           
           -- Do targetX * coefs and get the result
           result   = round $ (targetX `multStd` coefs) ! (1, 1)
