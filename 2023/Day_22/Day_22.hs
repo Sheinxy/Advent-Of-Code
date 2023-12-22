@@ -36,7 +36,7 @@ type Output = Int
 fallDown :: [Brick] -> M.Map Int Brick
 fallDown = foldl' go M.empty
     where ground = S.singleton (-1)  -- Singleton for bricks supported only by the ground
-          go fall cur | z == 0        = M.insert i (cur { minZ=z+1 , maxZ=mz+1 , cubes=backCubes, supporting=ground}) fall -- Touched the ground
+          go fall cur | z == 0        = M.insert i (cur { minZ=z+1 , maxZ=mz+1 , cubes=backCubes, supporting=ground }) fall -- Touched the ground
                       | null touching = go fall    (cur { minZ=z+dz, maxZ=mz+dz, cubes=nextCubes }) -- Touched no bricks
                       | otherwise     = M.insert i (cur { minZ=z+1 , maxZ=mz+1 , cubes=backCubes, supporting=touching }) fall
                       where i         = M.size fall -- The index for the current brick
