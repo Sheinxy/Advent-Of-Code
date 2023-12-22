@@ -73,7 +73,7 @@ removeBricks toRemove = M.map removeSupporting . (`M.withoutKeys` toRemove)
 
 -- Remove a brick and let the chain reaction happen
 disintegrate :: Input -> Int -> Input
-disintegrate bricks removed = until (\state -> state == removeFalling state) removeFalling startState -- Fix-point iteration
+disintegrate bricks removed = until (null . getFalling) removeFalling startState -- Fix-point iteration
     where toRemove          = S.singleton removed
           startState        = removeBricks toRemove bricks
           removeFalling     = removeBricks =<< getFalling
