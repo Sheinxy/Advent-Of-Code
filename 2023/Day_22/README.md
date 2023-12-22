@@ -120,7 +120,7 @@ This, however, will also put the ground as an unremovable brick (which is, ultim
 
 ```hs
 getUnremovableBricks :: Input -> S.Set Int
-getUnremovableBricks = S.filter (-1 /=) . M.foldr go S.empty
+getUnremovableBricks = S.delete (-1) . M.foldr go S.empty
    where go cur acc | (S.size . supporting) cur == 1 = acc `S.union` supporting cur
                     | otherwise                      = acc
 ```
