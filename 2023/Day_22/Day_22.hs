@@ -12,7 +12,7 @@ import System.Environment
 data Brick = Brick { minZ :: Int, maxZ :: Int, cubes :: S.Set (Int, Int, Int), supporting :: S.Set Int} deriving (Eq, Ord)
 
 instance Read Brick where
-    readsPrec _ s = [(Brick minZ maxZ cubes S.empty, unwords . tail . words $ s)]
+    readsPrec _ s = [(Brick minZ maxZ cubes S.empty, "")]
         where (edge1, '~':edge2)           = break (=='~') . head . words $ s
               ((x1, y1, z1), (x2, y2, z2)) = both (read . ('(' :) . (++ ")")) (edge1, edge2)
               minZ  = min z1 z2
