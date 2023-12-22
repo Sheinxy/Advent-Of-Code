@@ -55,7 +55,7 @@ parseInput :: String -> Input
 parseInput = fallDown . sort . map read . lines
 
 getUnremovableBricks :: Input -> S.Set Int
-getUnremovableBricks = S.filter (-1 /=) . M.foldr go S.empty
+getUnremovableBricks = S.delete (-1) . M.foldr go S.empty
    where go cur acc | (S.size . supporting) cur == 1 = acc `S.union` supporting cur
                     | otherwise                      = acc
 
