@@ -11,6 +11,7 @@ import System.Environment
 
 data Brick = Brick { minZ :: Int, maxZ :: Int, cubes :: S.Set (Int, Int, Int), supporting :: S.Set Int} deriving (Eq, Ord)
 
+-- I am just having fun with instances here. I had no actual reason to make a show and read instance, but I wanted to
 instance Read Brick where
     readsPrec _ s = [(Brick minZ maxZ cubes S.empty, "")]
         where (edge1, '~':edge2)           = break (=='~') . head . words $ s
