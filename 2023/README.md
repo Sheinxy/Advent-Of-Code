@@ -9,7 +9,7 @@ Watch me code in Haskell for 25 days straight
 |  [Day 02](./Day_02)	|    ✅    	|    ✅    	|  [Day 11](./Day_11)	|    ✅     |    ✅    	|  [Day 20](./Day_20)	|    ✅    	|    ✅    	|
 |  [Day 03](./Day_03)	|    ✅    	|    ✅    	|  [Day 12](./Day_12)	|    ✅    	|    ✅     |  [Day 21](./Day_21)	|    ✅    	|    ✅    	|
 |  [Day 04](./Day_04)	|    ✅    	|    ✅    	|  [Day 13](./Day_13)	|    ✅     |    ✅    	|  [Day 22](./Day_22)	|    ✅    	|    ✅    	|
-|  [Day 05](./Day_05)	|    ✅    	|    ✅    	|  [Day 14](./Day_14)	|    ✅     |    ✅     |  [Day 23](./Day_23)	|        	|        	|
+|  [Day 05](./Day_05)	|    ✅    	|    ✅    	|  [Day 14](./Day_14)	|    ✅     |    ✅     |  [Day 23](./Day_23)	|    ✅    	|    ✅   	|
 |  [Day 06](./Day_06)	|    ✅   	|    ✅    	|  [Day 15](./Day_15)	|    ✅     |    ✅    	|  [Day 24](./Day_24)	|        	|        	|
 |  [Day 07](./Day_07)	|    ✅    	|    ✅    	|  [Day 16](./Day_16)	|    ✅     |    ✅    	|  [Day 25](./Day_25)	|        	|        	|
 |  [Day 08](./Day_08)	|    ✅    	|    ✅    	|  [Day 17](./Day_17)	|    ✅     |    ✅    	|     	|        	|        	|
@@ -96,3 +96,6 @@ Stop making me analyse the input :)
 
 ### [Day 22](./Day_22)
 Problems in 3 dimensions usually scare me. But it turns out this one barely makes use of its third dimension, so all is well :D
+
+### [Day 23](./Day_23)
+Now this is the AoC I like, where analysing the input gives me hint at what a more optimised solution could be, without making my solution input-specific!
