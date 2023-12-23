@@ -4,7 +4,6 @@ import           Control.Parallel.Strategies
 import           Data.List
 import           Data.Matrix
 import qualified Data.Map           as M
-import           Data.Ord
 import qualified Data.Set           as S
 import           System.Environment
 
@@ -56,7 +55,6 @@ findLongestPath isSlippy input = go S.empty 0 (start input)
                               where seen'        = S.insert cur seen
                                     neighbours   = [(dist, pos) | (dist, pos) <- graph M.! cur, pos `S.notMember` seen]
                                     best         = maximum (0 : parMap rseq (uncurry (go seen' . (pathLen +))) neighbours)
-
 
 partOne :: Input -> Output
 partOne = findLongestPath True
