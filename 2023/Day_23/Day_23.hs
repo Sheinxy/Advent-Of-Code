@@ -10,7 +10,7 @@ import           System.Environment
 data Input  = Input { start :: (Int, Int), end :: (Int, Int), grid :: Matrix Char } deriving (Show)
 type Output = Int
 
-type WGraph = M.Map (Int, Int) [(Int, (Int, Int))]
+type WGraph = M.Map (Int, Int) [((Int, Int), Int)]
 
 parseInput :: String -> Input
 parseInput input = Input { start=start, end=end, grid=grid }
@@ -35,17 +35,19 @@ makeJunctionGraph isSlippy (Input start end grid) = treatJunctions (S.singleton 
                          | otherwise                  = length (getNeighbours isSlippy pos grid) > 2
           treatJunctions _ graph [] = graph
           treatJunctions seen graph (x:queue) = treatJunctions seen' graph' queue'
-            where nextJunctions = findNextJunctions (S.singleton x) [(0, x)]
+            where nextJunctions = filter ((x /=) . fst) . M.assocs $ findNextJunctions (S.singleton x) [(x, 0)] M.empty
                   graph'    = M.insert x nextJunctions graph
-                  junctions = filter (`S.notMember` seen) $ map snd nextJunctions
+                  junctions = filter (`S.notMember` seen) $ map fst nextJunctions
                   seen'     = foldr S.insert seen junctions
                   queue'    = queue ++ junctions
-          findNextJunctions _ [] = []
-          findNextJunctions seen ((d, x):queue) | d > 0 && isJunction x = (d, x) : findNextJunctions seen queue
-                                                | otherwise             =          findNextJunctions seen' queue'
-            where neighbours = filter (`S.notMember` seen) $ getNeighbours isSlippy x grid
+          findNextJunctions _ [] found = found
+          findNextJunctions seen ((x, d):queue) found | d > 0 && isJunction x = findNextJunctions seen queue found'
+                                                      | otherwise             = findNextJunctions seen' queue' found
+            where neighbours = filter (\x -> isJunction x || x `S.notMember` seen) $ getNeighbours isSlippy x grid
                   seen'      = foldr S.insert seen neighbours
-                  queue'     = queue ++ zip (repeat (d + 1)) neighbours
+                  queue'     = queue ++ zip neighbours (repeat (d + 1)) 
+                  found'     | x `M.member` found = M.adjust (max d) x found -- There is another way to get to this junction: keep the longest
+                             | otherwise          = M.insert x d found
 
 findLongestPath :: Bool -> Input -> Output
 findLongestPath isSlippy input = go S.empty 0 (start input)
@@ -53,8 +55,8 @@ findLongestPath isSlippy input = go S.empty 0 (start input)
           go seen pathLen cur | cur == end input = pathLen
                               | otherwise        = best
                               where seen'        = S.insert cur seen
-                                    neighbours   = [(dist, pos) | (dist, pos) <- graph M.! cur, pos `S.notMember` seen]
-                                    best         = maximum (0 : parMap rseq (uncurry (go seen' . (pathLen +))) neighbours)
+                                    neighbours   = [(pos, dist) | (pos, dist) <- graph M.! cur, pos `S.notMember` seen]
+                                    best         = maximum (0 : parMap rseq (\(p, d) -> go seen' (pathLen + d) p) neighbours)
 
 partOne :: Input -> Output
 partOne = findLongestPath True
