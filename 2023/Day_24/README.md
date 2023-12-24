@@ -6,7 +6,7 @@ Today was my first time using a SAT solver :D
 
 ## The input:
 
-I represent my hailstones with a data structure containing their positions and velocitys as 3-tuples:
+I represent my hailstones with a data structure containing their positions and velocities as 3-tuples:
 ```hs
 data Hailstone = Hailstone { position :: (Int, Int, Int), velocity :: (Int, Int, Int) } deriving (Show, Eq, Ord)
 ```
@@ -143,4 +143,4 @@ partTwo input = do
     return $ read . takeWhile (/= '.') . show $ s -- Funky conversion from AlgReal to Int :)
 ```
 
-I am not quite knowledgeable with Monads and the do notation for now, this is mostly my first time using the this much. Something to learn more about!
+I am not quite knowledgeable with Monads and the do notation for now, this is mostly my first time using them as much as this much. Something to learn more about!
