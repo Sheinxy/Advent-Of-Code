@@ -40,7 +40,7 @@ partOne :: Input -> Output
 partOne = getIntersectingInArea 200000000000000 400000000000000
 
 satSolve :: Input -> IO SatResult
-satSolve input = satWith z3 $ do
+satSolve input = sat $ do
     -- Technically this should be sIntegers, however sReals is faster and the input is specific enough to yield integers
     [x, y, z, vx, vy, vz] <- sReals ["x", "y", "z", "vx", "vy", "vz"]
 
