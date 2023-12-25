@@ -81,9 +81,9 @@ partOne input = do
     (Just hin, _, _, _) <- createProcess (proc "neato" ["-T" ++ extension]){ std_out = UseHandle file, std_in = CreatePipe }
     hPutStrLn hin $ getDot input
     hClose hin
+    hClose file
 
     _ <- createProcess (proc "xdg-open" [filename])
-    hClose file
 
     putStrLn "Select edges to remove:"
     edgesS     <- getLine
