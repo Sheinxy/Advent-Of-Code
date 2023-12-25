@@ -54,7 +54,7 @@ partOne input = do
     
 
 partTwo :: Input -> Output
-partTwo = length "merry xmas!"
+partTwo = const $ length "merry xmas!"
 
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
