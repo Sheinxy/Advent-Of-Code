@@ -19,7 +19,7 @@ parseInput = foldr (makeGraph . words) M.empty . lines
 
 getDot :: Input -> String
 getDot input = "graph {\n\t" ++ nodes ++ "\n}"
-    where nodes = intercalate "\n\t" [key ++ " -- {" ++ intercalate ", " succ ++ "};" | (key, succ) <- M.assocs input]
+    where nodes = intercalate "\n\t" [key ++ " -- {" ++ intercalate ", " (filter (> key) succ) ++ "};" | (key, succ) <- M.assocs input]
 
 removeEdge :: Input -> (String, String) -> Input
 removeEdge graph (a, b) = M.adjust (filter (/= b)) a $ M.adjust (filter (/= a)) b graph
@@ -35,13 +35,17 @@ getComponent graph = bfs (S.singleton start) [start]
 
 partOne :: Input -> IO Output
 partOne input = do
-    file <- openFile "graph.png" WriteMode
+    let extension = "pdf"
+    let filename  = "graph." ++ extension
 
-    (Just hin, _, _, _) <- createProcess (proc "neato" ["-Tpng"]){ std_out = UseHandle file, std_in = CreatePipe }
+    file <- openFile filename WriteMode
+
+    (Just hin, _, _, _) <- createProcess (proc "neato" ["-T" ++ extension]){ std_out = UseHandle file, std_in = CreatePipe }
     hPutStrLn hin $ getDot input
     hClose hin
 
-    (_, _, _, _) <- createProcess (proc "feh" ["graph.png"])
+    _ <- createProcess (proc "xdg-open" [filename])
+    hClose file
 
     putStrLn "Select edges to remove:"
     edgesS     <- getLine
@@ -58,7 +62,7 @@ partTwo = const $ length "merry xmas!"
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
 compute input "dot"   = putStrLn . getDot  $ input
-compute input "one"   = print =<<  partOne input
+compute input "one"   = print =<<  partOne   input
 compute input "two"   = print    . partTwo $ input
 compute input _       = error "Unknown part"
 
