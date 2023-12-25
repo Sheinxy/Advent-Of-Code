@@ -11,8 +11,8 @@ type Input = M.Map String [String]
 type Output = Int
 
 parseInput :: String -> Input
-parseInput = foldr makeGraph M.empty . map words . lines
-    where addOtherEdge succ node graph  = M.insertWith (++) node [succ] graph
+parseInput = foldr (makeGraph . words) M.empty . lines
+    where addOtherEdge succ node        = M.insertWith (++) node [succ]
           makeGraph (node : succ) graph = foldr (addOtherEdge nodeName) graph' succ
             where nodeName = init node
                   graph'   = M.insertWith (++) nodeName succ graph
@@ -51,7 +51,6 @@ partOne input = do
     let s2     = M.size input - s1
 
     return (s1 * s2)
-    
 
 partTwo :: Input -> Output
 partTwo = const $ length "merry xmas!"
