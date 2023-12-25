@@ -47,7 +47,7 @@ partOne input = do
 
     _ <- createProcess (proc "xdg-open" [filename])
 
-    putStrLn "Select edges to remove:"
+    putStrLn "Select edges to remove (e.g: (\"bvb\", \"cmg\"), (\"nvd\", \"jqt\"), (\"hfx\", \"pzl\")):"
     edgesS     <- getLine
     let edges  = read $ "[" ++ edgesS ++ "]" :: [(String, String)]
     let graph  = foldl' removeEdge input edges
