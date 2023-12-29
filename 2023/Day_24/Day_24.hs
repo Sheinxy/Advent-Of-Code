@@ -6,6 +6,7 @@ import Data.NumInstances.Tuple
 import Data.Foldable
 import Data.Tuple.Extra (both)
 import Data.SBV
+import GHC.Real(Ratio((:%)))
 import System.Environment
 
 data Hailstone = Hailstone { position :: (Int, Int, Int), velocity :: (Int, Int, Int) } deriving (Show, Eq, Ord)
@@ -58,7 +59,12 @@ partTwo input = do
     let y = fromJust $ "y" `getModelValue` res
     let z = fromJust $ "z" `getModelValue` res
     let s = (x + y + z) :: AlgReal
-    return $ read . takeWhile (/= '.') . show $ s -- Funky conversion from AlgReal to Int :)
+    -- Thank you LeventErkok for pointing that out! (also, as AOC is over, I am no longer following my "no case" self imposed challenge C:)
+    case toRational s of
+      a :% 1 -> return $ fromInteger a
+      _      -> error "Not an integer"
+
+    -- return $ read . takeWhile (/= '.') . show $ s -- Funky conversion from AlgReal to Int :)
 
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
