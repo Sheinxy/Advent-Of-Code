@@ -103,7 +103,7 @@ Now, I simply apply this computation to each report, and I check that any subrep
 
 ```hs
 partTwo :: Input -> Output
-partTwo = length . filter id . map (any (isSafe . computeDiff) . computePossibilities)
+partTwo = length . filter (any (isSafe . computeDiff) . computePossibilities)
     where computePossibilities l = filter (\x -> abs (length l - length x) <= 1) $ subsequences l
           computeDiff report = zipWith (-) report $ tail report
           isSafe diff = all (\x -> 1 <= x && x <= 3) diff || all (\x -> -3 <= x && x <= -1) diff
