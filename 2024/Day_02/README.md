@@ -1,6 +1,7 @@
 ## Day 02
 
 Today was simple and fun!
+
 ![Yippee](https://cdn.discordapp.com/attachments/690279803701821703/1313100922460704839/yippee.png?ex=674ee808&is=674d9688&hm=797a36aae9d2dd4cc3b1cd00bc305f9c0a1574f2b3ffc7ded1e37d0b90654a13&)
 
 ## The input:
