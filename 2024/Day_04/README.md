@@ -122,7 +122,7 @@ MSAMASMSMX
 XMASAMXAMM
 ```
 
-Then, for each subset, I shift each line by it's index`.
+Then, for each subset, I shift each line by it's index.
 
 For example our last result will get shifted like this:
 ```
@@ -132,7 +132,7 @@ MASMSMX
 AMXAMM
 ```
 
-Now, if there was "XMAS" written diagonally, the letter would all fall on the same column!
+Now, if there was "XMAS" written diagonally, the letters would all fall on the same column!
 
 In other terms, we now simply need to count vertically!
 
@@ -158,7 +158,7 @@ partOne input = searchHorizontal input + searchVertical input + searchDiagonal i
                   countInDiagonal = sum . map searchVertical . getDiagonals
 ```
 
-And it's actually not to slow OwO
+And it's actually not too slow OwO
 ```
 sh$ time ./Day_04 one input
 2549
