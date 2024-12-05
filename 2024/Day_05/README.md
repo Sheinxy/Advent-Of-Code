@@ -28,7 +28,7 @@ and I let Haskell read it into a list of integers :)
 parseInput :: String -> Input
 parseInput = getInput . break null . lines
     where getInput (orders, _ : numbers) = (map readOrder orders, map readNumber numbers)
-          readOrder n = (read (fst $ span (/= '|') n), read (tail . snd $ span (/= '|') n))
+          readOrder n = (read (takeWhile (/= '|') n), read (tail $ dropWhile (/= '|') n))
           readNumber n = read ("[" ++ n ++ "]") :: [Int]
 ```
 
@@ -65,10 +65,10 @@ we can use its middle point!
 
 ```hs 
 middle :: [a] -> a
-middle l = head $ drop (length l `div` 2) l
+middle l = l !! (length l `div` 2)
 
 partOne :: Input -> Output
-partOne (orders, input) = sum [middle a | (a, b) <- (zip ordered input), a == b]
+partOne (orders, input) = sum [middle a | (a, b) <- zip ordered input, a == b]
     where ordered = map (sortBy $ getCorrectOrder orders) input
 ```
 
@@ -85,7 +85,7 @@ We already ordered them. We just need to sum up their middle element!
 
 ```hs
 partTwo :: Input -> Output
-partTwo (orders, input) = sum [middle a | (a, b) <- (zip ordered input), a /= b]
+partTwo (orders, input) = sum [middle a | (a, b) <- zip ordered input, a /= b]
     where ordered = map (sortBy $ getCorrectOrder orders) input
 ```
 
