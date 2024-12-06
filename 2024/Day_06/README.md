@@ -234,4 +234,7 @@ partTwo input = length . filter id $ parMap rseq tryBlocking guardPath
 
 Bruteforcing goes brrrrrrrrrrrrrrr!
 
+Once again, using a Data.Array or Data.Matrix would've been better in order to keep track of the obstacles,
+as they have O(1) index-based access.
 
+But I just didn't feel like it...
