@@ -49,7 +49,7 @@ Basically, if my input is
 ```
 ab
 de
-```,
+```
 indexedLines will be
 ```
 [(0, 0, 'a'), (0, 1, 'b'), (1, 0, 'd'), (1, 1, 'e')]
