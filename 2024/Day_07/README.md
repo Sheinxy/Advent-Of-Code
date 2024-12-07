@@ -42,7 +42,7 @@ partTwo = sum . map fst . filter isDeducible
                                                testOperations target (read $ show acc ++ show x) xs
 ```
 
-The only weird operator is "||", which I simply create by converting all numbers to strings, concatenating them and converting the result back to an int. (Not optimised but it works and was fast to write)
+The only weird operator is "\|\|", which I simply create by converting all numbers to strings, concatenating them and converting the result back to an int. (Not optimised but it works and was fast to write)
 
 ## The end
 
