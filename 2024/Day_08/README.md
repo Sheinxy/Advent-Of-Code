@@ -115,7 +115,7 @@ getAntinodes steps (height, width) (i1, j1) (i2, j2) = antinodes
 Note a few things here:
 
 - I use (i1 - i2, j1 - j2) as my slope here. It doesn't really matter considering that the parametric equation holds for any t (therefore t can be negative).
-- I move forwards starting from (i1, j1) and backwards starting from (i2, j2), but I could've started from the same point: the parametric equation will still hold not matter what (x1, y1) I choose.
+- I move forwards starting from (i1, j1) and backwards starting from (i2, j2), but I could've started from the same point: the parametric equation will still hold not matter what (x1, y1) I choose. It was just easier to solve part one by starting from two different points, and it made the code more reusable for part two.
 
 Once I have that, all I need to do is to get the antinodes for each pair of antennas of each antenna group. For part 1 I only need to use t = 1, while for part 2 I
 need to use every possible t starting from 0:
