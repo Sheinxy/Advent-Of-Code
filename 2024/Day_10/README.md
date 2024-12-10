@@ -22,7 +22,7 @@ parseInput input = listArray ((1, 1), (numRows, numCols)) (concat grid)
           numCols = length . head $ grid
 ```
 
-This is an array index with (Int, Int) tuples (coordinates).
+This is an array indexed with (Int, Int) tuples (coordinates).
 
 ## Part 1
 
@@ -36,7 +36,7 @@ always increasing by 1.
 This is a textbook example of a graph search. There are two types of graph search:
 [BFS](https://en.wikipedia.org/wiki/Breadth-first_search) and [DFS](https://en.wikipedia.org/wiki/Depth-first_search).
 
-DFS is technically more suitable here, as it is intrasecly recursive, however I instinctively
+DFS is technically more suitable here, as it is intrinsically recursive, however I instinctively
 went with a BFS here because my mind associates grids with BFS.
 
 In both case, we first need to define a `getNeighbours` function.
