@@ -41,7 +41,7 @@ went with a BFS here because my mind associates grids with BFS.
 
 In both case, we first need to define a `getNeighbours` function.
 
-Here, neighbours of a tile are in-bounds tiles with a taxicab distance of 1:
+Here, neighbours of a tile are in-bounds tiles within a [taxicab distance](https://en.wikipedia.org/wiki/Taxicab_geometry) of 1:
 ```hs
 getNeighbours :: Input -> (Int, Int) -> [(Int, Int)]
 getNeighbours grid (i, j) = filter isInBound neighbours
