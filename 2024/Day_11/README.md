@@ -61,7 +61,7 @@ blink = Map.foldrWithKey transformStone Map.empty
             | (even . length) stoneStr = Map.alter (addStone count) rightHalf $ Map.alter (addStone count) leftHalf res
             | otherwise                = Map.alter (addStone count) (stone * 2024) res
             where stoneStr = show stone
-                  (leftHalf, rightHalf) = (read *** read) $ splitAt (length stoneStr `div` 2) stoneStr
+                  (leftHalf, rightHalf) = both read $ splitAt (length stoneStr `div` 2) stoneStr
 ```
 
 We start with an empty map, and we apply the transformStone function to every stone of our input.
