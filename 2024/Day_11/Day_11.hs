@@ -23,7 +23,7 @@ blink = Map.foldrWithKey transformStone Map.empty
             | (even . length) stoneStr = Map.alter (addStone count) rightHalf $ Map.alter (addStone count) leftHalf res
             | otherwise                = Map.alter (addStone count) (stone * 2024) res
             where stoneStr = show stone
-                  (leftHalf, rightHalf) = (read *** read) $ splitAt (length stoneStr `div` 2) stoneStr
+                  (leftHalf, rightHalf) = both read $ splitAt (length stoneStr `div` 2) stoneStr
 
 partOne :: Input -> Output
 partOne = sum . Map.elems . (!! 25) . iterate blink 
