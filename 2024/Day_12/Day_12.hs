@@ -59,7 +59,7 @@ computeBulkPrice region = sum (map countEdgesOfTurn turnPoints) * Set.size regio
           turnPointList          = [isOutFTurnPoint, isOutJTurnPoint, isInLTurnPoint, isIn7TurnPoint]
 
           isTurnPoint x          = any ($ x) turnPointList
-          countEdgesOfTurn x     = 2 * length $ filter ($ x) turnPointList
+          countEdgesOfTurn x     = 2 * length (filter ($ x) turnPointList)
 
 partTwo :: Input -> Output
 partTwo = sum . map computeBulkPrice . findRegions
