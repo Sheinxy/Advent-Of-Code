@@ -87,7 +87,7 @@ AA
 For example here, if I count "F"-shaped corners, "L"-shaped corners, "7"-shaped corners and "J"-shaped corners,
 I find four corners. Which is technically true, but I would now need to find which edge overlaps with which.
 
-Therefore, I will only count "complimentary" corners. I have decided to only count "F" and "J" corners.
+Therefore, I will only count "complementary" corners. I have decided to only count "F" and "J" corners.
 
 The problem now is with the following shape:
 ```
