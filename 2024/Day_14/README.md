@@ -119,13 +119,13 @@ partTwo input =  for_ [0 .. fst size * snd size] $ \i -> do
 
 And now, I just launch that and I look manually.
 
-In order to be more efficient (or less unefficient), I use a grep to find lines with multiple "#" (as it will probably give me a better chance of finding the tree):
+In order to be more efficient (or less inefficient), I use a `grep` to find lines with multiple "#" (as it will probably give me a better chance of finding the tree):
 
 ```hs
 ./Day two input | fgrep -B 101 "#####" > result
 ```
 
-Read that with less, and enjoy you horrible moment
+Read that with `less`, and enjoy your horrible moment
 
 ## The end part
 
