@@ -196,5 +196,4 @@ Comparisons:
 ./Day_16 bonus input  4.74s user 0.07s system 98% cpu 4.869 total
 ```
 
-If anyone know what the hell I did, don't hesitate reaching me on [bluesky](https://bsky.app/profile/sheinxy.bsky.social).
-
+If anyone know what the hell I did, don't hesitate to reach me on [bluesky](https://bsky.app/profile/sheinxy.bsky.social).
