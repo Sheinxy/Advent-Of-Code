@@ -196,4 +196,11 @@ Comparisons:
 ./Day_16 bonus input  4.74s user 0.07s system 98% cpu 4.869 total
 ```
 
+I also have a feeling that it is technicaly not right as a path-finding algorithm:
+- The value for the end position will depend on the last computed path.
+- With the smallest higher bound possible, it is guaranted to be the right value
+- However, for some higher bound I am not sure that it would work.
+
+One way to fix that would be to swap the `position x == end` guard with the `dist >= bestDist` guard, and to initialise mem with all possible states for end at `(True, maxDist)`
+
 If anyone know what the hell I did, don't hesitate to reach me on [bluesky](https://bsky.app/profile/sheinxy.bsky.social).
