@@ -203,7 +203,9 @@ I also have a feeling that it is technicaly not right as a path-finding algorith
 
 One way to fix that would be to swap the `position x == end` guard with the `dist >= bestDist` guard, and to initialise mem with all possible states for end at `(True, maxDist)`
 
-But even that won't fix everything. I will proabably analyze my algorithm further in the upcoming months, because I feel like it's quite fascinating and I want to understand it better and improve it.
+But even that won't fix everything. I know that if the higher bound is not exactly the shortest path length some input won't work.
+
+I will probably analyze my algorithm further in the upcoming months, because I feel like it's quite fascinating and I want to understand it better and improve it.
 It was made in a few dozen minutes, therefore it is quite unpolished and unoptimised, and only works on intuition rather than concrete proof, but I feel like there is something interesting in it.
 
 If anyone know what the hell I did, don't hesitate to reach me on [bluesky](https://bsky.app/profile/sheinxy.bsky.social).
