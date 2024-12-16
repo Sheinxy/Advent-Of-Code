@@ -112,8 +112,8 @@ So what I did is the following:
     - If this state is part of a shortest path
     - The smallest distance of that state from the start
   of the path.
-- If the current distance from the start for that tile is greater than the smallest distance previously found, or that the current distance is greater than or equal to the shortest path's length, then we do not need to compute that state.
 - If the current tile is the end tile, then we do not need to compute that tile. We can simply say that it is part
+- If the current distance from the start for that tile is greater than the smallest distance previously found, or that the current distance is greater than or equal to the shortest path's length, then we do not need to compute that state.
 - Otherwise we visit the neighbours (and update our map accordingly). If one of the neighbour is part of the path, and that the shortest path for that neighbour is the distance of the current tile + the cost of going to that neighbour, then this means that our current tile is on a path.
 
 ```hs

@@ -1,7 +1,6 @@
 module Main where
 
 import System.Environment
-import Debug.Trace
 import Algorithm.Search
 import Data.Array.IArray
 import Data.Maybe
