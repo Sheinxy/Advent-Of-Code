@@ -1,0 +1,13 @@
+int regB, regC = 0, 0;
+
+do
+{
+    regB = regA & 0b111;
+    regB = regB ^ 1;
+    regC = regA >> regB;
+    regB = rebB ^ 5;
+    regB = regB ^ regC:
+    printf("%d\n", regB & 0b111);
+    regA = rebA >> 3;
+} while (regA != 0);
+
