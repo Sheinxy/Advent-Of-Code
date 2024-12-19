@@ -94,6 +94,14 @@ partOne (towels, designs) = length $ filter isPatternMem designs
 
 While this type of memoization is not the fastest (a `Set` or `Map` would likely be more efficient), I find it quite elegant.
 
+One thing that make it slower than using a `Map`, I believe, is that the memoization
+only works for one to isPatternMem. Using a `Map` it would be easier to keep
+the memoization cache updated between successive calls.
+I am not quite sure that this is actually the case though, as I am not yet familiar
+with how fixpoint-memoization works. I'll try to improve my understanding on it,
+as well as my solution.
+
+
 ```shell
 ➜  Day_19 git:(main) ✗ ghc -package memoize -O2 Day_19.hs
 Loaded package environment from /Users/sheinxy/.ghc/x86_64-darwin-8.8.4/environments/default
