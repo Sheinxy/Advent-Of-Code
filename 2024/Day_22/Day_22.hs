@@ -3,7 +3,6 @@ module Main where
 import System.Environment
 import Data.Bits
 import Data.List
-import Data.Function
 import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Set (Set)
