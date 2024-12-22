@@ -28,7 +28,6 @@ The first reason is that it was really difficult to understand.
 The basic idea is as follows:
 - We have a numpad and directional keypads (which I'll refer to as "keypad").
 - A robot has to press a code on the numpad.
-- Another robot controls that robot using a keypad.
 - Another robot controls the previous robot using a keypad.
 - And yet another robot controls *that* robot using a keypad.
 - Finally, *we* control the last robot using a keypad.
