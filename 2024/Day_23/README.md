@@ -131,8 +131,44 @@ partTwo input = intercalate "," . sort $ maxClique
 
 ---
 
+## Bonus
+
+Let's code the most basic implementation of the algorithm!
+
+```hs
+bronKerbosch :: Input -> [[String]]
+bronKerbosch graph = bronKerbosch' Set.empty nodes Set.empty
+    where nodes = Set.fromList $ Map.keys graph
+          bronKerbosch' :: Set String -> Set String -> Set String -> [[String]]
+          bronKerbosch' r p x | Set.null p && Set.null x = [Set.toList r]
+                              | otherwise = res
+            where (_, _, res) = Set.foldr go (x, p, []) p
+                  go v (x, p, res) = (Set.insert v x, Set.delete v p, res ++ bronKerbosch' r' p' x')
+                    where r' = Set.insert v r
+                          p' = Set.intersection p $ Set.fromList (graph Map.! v)
+                          x' = Set.intersection x $ Set.fromList (graph Map.! v)
+
+partBonus :: Input -> String
+partBonus = intercalate "," . sort .
+            maximumBy (compare `on` length) .
+            bronKerbosch
+```
+
+The runtime is a bit slower (which is expected, notably because this implementation
+doesn't use any optimisation).
+
+```
+➜  Day_23 git:(main) ✗ stime ./Day_23 bonus input
+bs,cf,cn,gb,gk,jf,mp,qk,qo,st,ti,uc,xw
+        0.56 real         0.53 user         0.01 sys
+➜  Day_23 git:(main) ✗ stime ./Day_23 two input
+bs,cf,cn,gb,gk,jf,mp,qk,qo,st,ti,uc,xw
+        0.08 real         0.06 user         0.01 sys
+```
+
 ## The end part  
 
 Maybe I’ll code the algorithm myself. Maybe.  
+**Update: I did.**
 
 I’m happy to have learned a new concept, though—I didn’t know what a clique was before!  
