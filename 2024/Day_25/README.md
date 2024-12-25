@@ -2,6 +2,8 @@
 
 Merry christmas everyone!
 
+![Christmas cat](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgetwallpapers.com%2Fwallpaper%2Ffull%2Fd%2F9%2F6%2F367413.jpg&f=1&nofb=1&ipt=b6b054284145ec0c1e20ddd3786657b797d289e5c7416534bae3cd3df3394547&ipo=images)
+
 ## Part 1: The actual writeup
 
 As usual, day 25 is only composed of one, fairly easy, part.
