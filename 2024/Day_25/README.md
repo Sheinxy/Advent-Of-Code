@@ -112,7 +112,7 @@ To be frank, I'm not sure if I want to put it second place or first place.
 
 I had quite a blast with this puzzle!
 
-Part one allowed me to do something that I wanted to do all year: Having some kind of "relexive-Haskell" solution!
+Part one allowed me to do something that I wanted to do all year: Having some kind of "reflexive-Haskell" solution!
 
 Part two was quite challenging, but it felt so good investigating how things work and getting
 an understanding of how to find what definitions are wrong and how to find the right definition.
