@@ -1,0 +1,72 @@
+cabal-version:      3.0
+name:               Advent-Of-Code
+version:            0.1.0.0
+-- synopsis:
+-- description:
+license:            0BSD
+author:             Sheinxy
+maintainer:         none
+-- copyright:
+build-type:         Simple
+-- extra-source-files:
+
+common warnings
+    ghc-options: -Wall
+common days
+    other-modules: Day01.Main,
+               Day02.Main,
+               Day03.Main,
+               Day04.Main,
+               Day05.Main,
+               Day06.Main,
+               Day07.Main,
+               Day08.Main,
+               Day09.Main,
+               Day10.Main,
+               Day11.Main,
+               Day12.Main,
+               Day13.Main,
+               Day14.Main,
+               Day15.Main,
+               Day16.Main,
+               Day17.Main,
+               Day18.Main,
+               Day19.Main,
+               Day20.Main,
+               Day21.Main,
+               Day22.Main,
+               Day23.Main,
+               Day24.Main,
+               Day25.Main
+
+library
+    import:           warnings
+    exposed-modules:  AOC
+    -- other-modules:
+    -- other-extensions:
+    build-depends:    base ^>=4.17.2.1,
+                      bytestring,
+                      http-client,
+                      http-conduit,
+                      http-types,
+                      regex-tdfa
+    hs-source-dirs:   common
+    default-language: Haskell2010
+
+executable AOC2015
+    import:           days
+    main-is:          Main.hs
+    -- other-modules:
+    -- other-extensions:
+    build-depends:
+        base ^>=4.17.2.1,
+        bytestring,
+        criterion-measurement,
+        cryptonite,
+        extra,
+        split,
+        Advent-Of-Code
+
+    hs-source-dirs:   2015/app, 2015/src
+    default-language: Haskell2010
+

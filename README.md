@@ -7,8 +7,12 @@ I love Haskell <3
 
 I am not a professional Haskell developper.
 
-My solutions are made to be standalone solutions for each day,
-I do not have my own helper library, and I do not package my solutions inside
+---
+
+## Old stuff 
+
+My solutions from 2020 to 2024 are made to be standalone solutions for each day,
+I did not have my own helper library, and I did not package my solutions inside
 a neat cabal App.
 
 This is not the fanciest or most professional Haskell code you'll see here,
