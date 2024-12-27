@@ -1,9 +1,9 @@
 module Main where
 
-import System.Environment
-import Data.Maybe
-import Data.List
-import Data.Char
+import           Data.Char
+import           Data.List
+import           Data.Maybe
+import           System.Environment
 
 type Input = [(Maybe Int, Int)]
 type Output = Int
@@ -34,8 +34,8 @@ moveEntireBlocks = reverse . go  . reverse
             | any (canFitFileInBlock x) xs = (Nothing, i) : go xs'
             | otherwise                    = x : go xs
             where xs' = reverse $ placeFile x $ reverse xs
-          canFitFileInBlock _ (Just _, _) = False
-          canFitFileInBlock (_, i) (Nothing, j) = i <= j 
+          canFitFileInBlock _ (Just _, _)       = False
+          canFitFileInBlock (_, i) (Nothing, j) = i <= j
           placeFile file@(Just v, i) xs
             | i < j  = before ++ (file : (Nothing, j - i) : after)
             | i == j = before ++ (file : after)
@@ -43,7 +43,7 @@ moveEntireBlocks = reverse . go  . reverse
 
 computeChecksum :: Input -> Output
 computeChecksum = fst .
-                  foldl (\(acc, idx) (x, l) -> 
+                  foldl (\(acc, idx) (x, l) ->
                           (acc + fromMaybe 0 x * sum [idx .. idx + l - 1],
                            idx + l))
                   (0, 0)
@@ -63,4 +63,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

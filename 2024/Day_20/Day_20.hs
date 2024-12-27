@@ -1,11 +1,11 @@
 module Main where
 
-import System.Environment
-import Data.Array.IArray
-import Algorithm.Search
-import Data.List
-import Data.Maybe
-import Control.Parallel.Strategies
+import           Algorithm.Search
+import           Control.Parallel.Strategies
+import           Data.Array.IArray
+import           Data.List
+import           Data.Maybe
+import           System.Environment
 
 data World = World { grid :: Array (Int, Int) Char, start :: (Int, Int), end :: (Int, Int) } deriving Show
 
@@ -56,4 +56,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

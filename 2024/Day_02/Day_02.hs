@@ -1,7 +1,7 @@
 module Main where
 
-import System.Environment
-import Data.List
+import           Data.List
+import           System.Environment
 
 type Input = [[Int]]
 type Output = Int

@@ -1,15 +1,15 @@
 module Main where
 
-import System.Environment
-import Data.Algorithm.MaximalCliques
-import Data.Function
-import Data.List
-import Data.List.Split
-import Data.Maybe
-import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
-import Data.Set (Set)
-import qualified Data.Set as Set
+import           Data.Algorithm.MaximalCliques
+import           Data.Function
+import           Data.List
+import           Data.List.Split
+import           Data.Map.Strict               (Map)
+import qualified Data.Map.Strict               as Map
+import           Data.Maybe
+import           Data.Set                      (Set)
+import qualified Data.Set                      as Set
+import           System.Environment
 
 type Input = Map String [String]
 type Output = Int
@@ -66,4 +66,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

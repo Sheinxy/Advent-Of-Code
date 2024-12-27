@@ -1,12 +1,12 @@
 module Main where
 
-import System.Environment
-import Data.List
-import Data.List.Split
-import Data.Array.IArray
-import Data.Tuple.Extra
-import Data.Set (Set)
-import qualified Data.Set as Set
+import           Data.Array.IArray
+import           Data.List
+import           Data.List.Split
+import           Data.Set           (Set)
+import qualified Data.Set           as Set
+import           Data.Tuple.Extra
+import           System.Environment
 
 data World = World { grid :: Array (Int, Int) Char, position :: (Int, Int) } deriving Show
 
@@ -45,7 +45,7 @@ move world dir
           g'    = g // [(p, getNew p ) | p <- moves]
 
           -- Get a tile's new state
-          getNew p | prev `elem` moves = g ! prev -- If the previous tile was moved, then this tile's new state is the previous tile's 
+          getNew p | prev `elem` moves = g ! prev -- If the previous tile was moved, then this tile's new state is the previous tile's
                    | otherwise         = '.'      -- Otherwise, this tile is now empty
                    where prev = applyTuple (-) p step
 
@@ -71,10 +71,10 @@ partOne = computeGPSScore . grid . uncurry (foldl move)
 
 expandWorld :: World -> World
 expandWorld world = World g' start
-    where expandChar '#'  = "##"
-          expandChar 'O'  = "[]"
-          expandChar '.'  = ".."
-          expandChar '@'  = "@."
+    where expandChar '#' = "##"
+          expandChar 'O' = "[]"
+          expandChar '.' = ".."
+          expandChar '@' = "@."
           g               = grid world
           (height, width) = snd $ bounds g
           width'          = (width + 1) * 2
@@ -93,4 +93,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

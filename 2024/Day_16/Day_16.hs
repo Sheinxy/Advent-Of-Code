@@ -1,14 +1,14 @@
 module Main where
 
-import System.Environment
-import Algorithm.Search
-import Data.Array.IArray
-import Data.Maybe
-import Data.List
-import Data.Set (Set)
-import qualified Data.Set as Set
-import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import           Algorithm.Search
+import           Data.Array.IArray
+import           Data.List
+import           Data.Map.Strict    (Map)
+import qualified Data.Map.Strict    as Map
+import           Data.Maybe
+import           Data.Set           (Set)
+import qualified Data.Set           as Set
+import           System.Environment
 
 data World = World { grid :: Array (Int, Int) Char, start :: (Int, Int), end :: (Int, Int) } deriving Show
 
@@ -94,4 +94,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

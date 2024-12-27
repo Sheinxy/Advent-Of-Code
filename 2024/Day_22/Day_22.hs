@@ -1,13 +1,13 @@
 module Main where
 
-import System.Environment
-import Data.Bits
-import Data.List
-import Data.Map (Map)
-import qualified Data.Map as Map
-import Data.Set (Set)
-import qualified Data.Set as Set
-import Control.Parallel.Strategies
+import           Control.Parallel.Strategies
+import           Data.Bits
+import           Data.List
+import           Data.Map                    (Map)
+import qualified Data.Map                    as Map
+import           Data.Set                    (Set)
+import qualified Data.Set                    as Set
+import           System.Environment
 
 type Input = [Int]
 type Output = Int
@@ -43,7 +43,7 @@ partTwo input = (Set.findMax . Set.map bananas) sequences
     where bananas sequence = sum . parMap rseq (Map.findWithDefault 0 sequence) $ mappings
           secrets   = getSecrets input
           mappings  = parMap rseq computeSequences secrets
-          sequences = Set.fromList (concatMap Map.keys mappings)
+          sequences = Set.fromList (mappings >>= Map.keys)
 
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
@@ -54,4 +54,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

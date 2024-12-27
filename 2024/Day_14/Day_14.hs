@@ -1,10 +1,10 @@
 module Main where
 
-import System.Environment
-import Text.Regex.TDFA
-import Data.Tuple.Extra
-import Data.List
-import Data.Foldable
+import           Data.Foldable
+import           Data.List
+import           Data.Tuple.Extra
+import           System.Environment
+import           Text.Regex.TDFA
 
 data Robot = Robot { position :: (Int, Int), velocity :: (Int, Int) } deriving (Show)
 
@@ -40,9 +40,9 @@ isInQuadrant (Robot (x, y) _)
     where (midX, midY) = both (`div` 2) size
 
 computeSafetyFactor :: Int -> Input -> Output
-computeSafetyFactor seconds = product . 
+computeSafetyFactor seconds = product .
                               map length .
-                              group . sort . 
+                              group . sort .
                               filter (/= 0) .
                               map (isInQuadrant . move seconds)
 
@@ -57,7 +57,7 @@ getGridAfter seconds rs = [ [ getRepresentingChar x y | x <- xs ] | y <- ys ]
           ys   = [0 .. height - 1]
           getRepresentingChar x y | any (\r -> position r == (x, y)) rs' = '#'
                                   | otherwise                            = ' '
-          
+
 partTwo :: Input -> IO ()
 partTwo input =  for_ [0 .. fst size * snd size] $ \i -> do
                     print i
@@ -72,4 +72,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

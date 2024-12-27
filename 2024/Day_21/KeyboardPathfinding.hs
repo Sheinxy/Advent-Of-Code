@@ -1,7 +1,7 @@
 module Keyboard.Pathfinding  where
 
-import Data.List
-import Data.Map.Strict (Map)
+import           Data.List
+import           Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 
 numpad :: Map Char (Int, Int)
@@ -30,7 +30,7 @@ computePaths m src dst | i == 0 = filter (not . leadsToVoidH) paths
                  | otherwise = '^'
 
           moves = replicate (abs dy) verDir ++ replicate (abs dx) horDir
-          paths = [moves, reverse moves] -- permutations moves 
+          paths = [moves, reverse moves] -- permutations moves
           leadsToVoidH = ((replicate j '<') `isPrefixOf`)
           leadsToVoidV = ((replicate i 'v') `isPrefixOf`)
 

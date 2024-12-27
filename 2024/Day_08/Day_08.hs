@@ -1,8 +1,8 @@
 module Main where
 
-import System.Environment
-import Data.List
-import Data.Function
+import           Data.Function
+import           Data.List
+import           System.Environment
 
 data World = World { antennas :: [[(Int, Int)]], height :: Int, width :: Int } deriving (Show)
 
@@ -14,8 +14,8 @@ parseInput input =  World antennas height width
     where grid = lines input
           height = length grid
           width  = length $ head grid
-          antennas = map (map fst)           $ 
-                     groupBy ((==) `on` snd) $ 
+          antennas = map (map fst)           $
+                     groupBy ((==) `on` snd) $
                      sortOn snd              $
                      filter ((/= '.') . snd) $
                      zip
@@ -55,4 +55,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

@@ -1,13 +1,13 @@
 {-# LANGUAGE NumericUnderscores #-}
 module Main where
 
-import System.Environment
-import Data.Either (Either (Right))
-import Data.List.Split
-import Data.Matrix
-import Data.Ratio
-import Data.Tuple.Extra
-import Text.Regex.TDFA
+import           Data.Either        (Either (Right))
+import           Data.List.Split
+import           Data.Matrix
+import           Data.Ratio
+import           Data.Tuple.Extra
+import           System.Environment
+import           Text.Regex.TDFA
 
 type Input = [(Matrix Rational, Matrix Rational)]
 type Output = Integer
@@ -16,7 +16,7 @@ parseInput :: String -> Input
 parseInput = map parseMachine . splitOn "\n\n"
     where parseMachine :: String -> (Matrix Rational, Matrix Rational)
           parseMachine machine = (coefs, result)
-            where [_ : numStr] = (machine =~ 
+            where [_ : numStr] = (machine =~
                                 "Button A: X\\+([0-9]+), Y\\+([0-9]+)\n\
                                 \Button B: X\\+([0-9]+), Y\\+([0-9]+)\n\
                                 \Prize: X=([0-9]+), Y=([0-9]+)") :: [[String]]
@@ -53,4 +53,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args
