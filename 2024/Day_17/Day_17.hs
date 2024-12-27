@@ -1,10 +1,10 @@
 module Main where
 
-import System.Environment
-import Data.Maybe
-import Data.Array.IArray
-import Data.Bits
-import Data.List
+import           Data.Array.IArray
+import           Data.Bits
+import           Data.List
+import           Data.Maybe
+import           System.Environment
 
 data Computer = Computer { program :: Array Int Int, pc :: Int, regA :: Int, regB :: Int, regC :: Int, stdout :: [Int]} deriving Show
 
@@ -128,4 +128,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

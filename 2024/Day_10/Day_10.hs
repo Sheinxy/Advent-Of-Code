@@ -1,10 +1,10 @@
 module Main where
 
-import System.Environment
-import Data.Array.IArray
-import Data.Char
-import Data.Set (Set)
-import qualified Data.Set as Set
+import           Data.Array.IArray
+import           Data.Char
+import           Data.Set           (Set)
+import qualified Data.Set           as Set
+import           System.Environment
 
 type Input = Array (Int, Int) Int
 type Output = Int
@@ -39,7 +39,7 @@ partTwo :: Input -> Output
 partTwo input = sum [bfs [p] | p <- startingPoints]
     where startingPoints = map fst . filter ((== 0) . snd) . assocs $ input
           bfs [] = 0
-          bfs (x : xs) 
+          bfs (x : xs)
             | current == 9   = 1 + bfs xs
             | otherwise      = bfs xs'
             where neighbours = getNeighbours input x
@@ -56,4 +56,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

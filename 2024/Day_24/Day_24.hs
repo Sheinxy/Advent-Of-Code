@@ -1,13 +1,13 @@
 module Main where
 
-import System.Environment
-import System.Process
-import System.IO
-import Data.Bits
-import Data.Char
-import Data.List
-import Data.Maybe
-import Numeric
+import           Data.Bits
+import           Data.Char
+import           Data.List
+import           Data.Maybe
+import           Numeric            (readInt)
+import           System.Environment
+import           System.IO
+import           System.Process
 
 data Operation   = AND | OR | XOR deriving (Eq, Read)
 data Definition  = Definition { var :: String, val :: Int }

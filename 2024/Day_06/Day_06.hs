@@ -1,10 +1,10 @@
 module Main where
 
-import Control.Parallel.Strategies
-import System.Environment
-import Data.Set (Set)
-import qualified Data.Set as Set
-import Data.Tuple.Extra
+import           Control.Parallel.Strategies
+import           Data.Set                    (Set)
+import qualified Data.Set                    as Set
+import           Data.Tuple.Extra
+import           System.Environment
 
 data Heading = North | South | West | East deriving (Show, Eq, Ord)
 
@@ -15,7 +15,7 @@ rotate South = West
 rotate West  = North
 
 data World = World { obstacles :: Set (Int, Int),
-                     position :: (Int, Int), 
+                     position :: (Int, Int),
                      heading :: Heading,
                      height :: Int, width :: Int } deriving Show
 
@@ -29,7 +29,7 @@ parseInput input = World obstacles start heading height width
           width  = length . head $ grid
           indexedLines = concat $ zipWith
                          (\i s -> ([(i, j, c) | (j, c) <- zip [0 .. ] s])) [0 .. ]
-                         grid 
+                         grid
           (start, c)   = head [((i, j), c) | (i, j, c) <- indexedLines, c `notElem` ".#"]
           obstacles    = Set.fromList [(i, j) | (i, j, c) <- indexedLines, c == '#']
           heading | c == '^'  = North
@@ -65,12 +65,12 @@ partOne :: Input -> Output
 partOne = Set.size . getGuardPath
 
 partTwo :: Input -> Output
-partTwo input = length . filter id $ parMap rseq tryBlocking guardPath 
+partTwo input = length . filter id $ parMap rseq tryBlocking guardPath
     where guardPath   = Set.toList $ Set.delete (position input) (getGuardPath input)
           isLoop = not . any (isOnEdge input). Set.toList
           tryBlocking pos = isLoop (getGuardPath w)
             where w = input { obstacles = Set.insert pos (obstacles input) }
-          
+
 
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
@@ -81,4 +81,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

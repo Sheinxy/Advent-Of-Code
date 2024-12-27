@@ -1,11 +1,11 @@
 module Main where
 
-import System.Environment
-import Data.List
-import Data.Function
-import Data.Function.Memoize
+import           Data.Function
+import           Data.Function.Memoize
+import           Data.List
+import           System.Environment
 
-import Keyboard.Pathfinding
+import           Keyboard.Pathfinding
 
 type Input = [String]
 type Output = Int
@@ -26,8 +26,8 @@ findDirPresses :: String -> [[String]]
 findDirPresses = findPresses getKeypadPaths
 
 findSequence :: (Int -> String -> Int) -> Int -> String -> Int
-findSequence f 0 s = length s 
-findSequence f n s = getRes s 
+findSequence f 0 s = length s
+findSequence f n s = getRes s
     where findSequence' = f (n - 1)
           getRes  = minimum .
                     map (sum . map findSequence') .
@@ -58,4 +58,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

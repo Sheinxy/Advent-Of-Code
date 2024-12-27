@@ -1,10 +1,10 @@
 module Main where
 
-import System.Environment
-import Data.List
-import Data.Tuple.Extra
-import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import           Data.List
+import           Data.Map.Strict    (Map)
+import qualified Data.Map.Strict    as Map
+import           Data.Tuple.Extra
+import           System.Environment
 
 type Input  = Map Int Int
 type Output = Int
@@ -13,7 +13,7 @@ parseInput :: String -> Input
 parseInput input = Map.fromList compressedNumbers
     where numbers           = map read . words $ input
           compressedNumbers = map (\l -> (head l, length l)) . group . sort  $ numbers
-          
+
 blink :: Input -> Input
 blink = Map.foldrWithKey transformStone Map.empty
     where addStone count Nothing       = Just count
@@ -26,10 +26,10 @@ blink = Map.foldrWithKey transformStone Map.empty
                   (leftHalf, rightHalf) = both read $ splitAt (length stoneStr `div` 2) stoneStr
 
 partOne :: Input -> Output
-partOne = sum . Map.elems . (!! 25) . iterate blink 
+partOne = sum . Map.elems . (!! 25) . iterate blink
 
 partTwo :: Input -> Output
-partTwo = sum . Map.elems . (!! 75) . iterate blink 
+partTwo = sum . Map.elems . (!! 75) . iterate blink
 
 compute :: Input -> String -> IO ()
 compute input "parse" = print input
@@ -40,4 +40,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args

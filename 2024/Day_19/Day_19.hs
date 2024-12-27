@@ -1,10 +1,10 @@
 module Main where
 
-import System.Environment
-import Data.Function.Memoize
-import Data.Function
-import Data.List
-import Data.List.Split
+import           Data.Function
+import           Data.Function.Memoize
+import           Data.List
+import           Data.List.Split
+import           System.Environment
 
 type Input = ([String], [String])
 type Output = Int
@@ -39,4 +39,4 @@ compute input _       = error "Unknown part"
 main = do
     args  <- getArgs
     input <- parseInput <$> readFile (last args)
-    mapM (compute input) $  init args 
+    mapM (compute input) $  init args
