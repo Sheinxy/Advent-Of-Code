@@ -60,6 +60,7 @@ executable AOC2015
     -- other-extensions:
     build-depends:
         base ^>=4.17.2.1,
+        array,
         bytestring,
         criterion-measurement,
         cryptonite,
