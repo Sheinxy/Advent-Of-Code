@@ -1,11 +1,12 @@
 module Day06.Main (day06) where
 
-import           AOC           (submit)
+import           AOC            (submit)
 import           Control.Monad
 import           Data.Array.IO
-import           Data.Char     (isDigit)
-import           Data.Foldable (forM_)
-import           Data.List     (isInfixOf)
+import           Data.Char      (isDigit)
+import           Data.Foldable  (forM_)
+import           Data.List      (isInfixOf)
+import           GHC.Utils.Misc
 
 data State = On
            | Off deriving (Show, Eq, Enum)
@@ -52,7 +53,7 @@ partOne input = do
                             >>= writeArray arr pos
                             .   toggleState
         elems <- getElems arr
-        return (length . filter (== On) $ elems)
+        return (count (== On) elems)
 
 partTwo :: Input -> IO Output
 partTwo input = do

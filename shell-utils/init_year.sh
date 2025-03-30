@@ -22,6 +22,7 @@ executable AOC$YEAR
     build-depends:
         base ^>=4.17.2.1,
         criterion-measurement,
+        ghc,
         split,
         Advent-Of-Code
 

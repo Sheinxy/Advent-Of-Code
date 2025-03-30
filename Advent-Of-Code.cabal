@@ -65,6 +65,7 @@ executable AOC2015
         criterion-measurement,
         cryptonite,
         extra,
+        ghc,
         split,
         Advent-Of-Code
 
