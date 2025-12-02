@@ -65,3 +65,4 @@ I've been writing up solutions since 2022. (Though I only covered the first few 
 - [2022](https://github.com/Sheinxy/Advent2022)  
 - [2023](./2023)  
 - [2024](./2024)  
+- [2025](./2025)  
