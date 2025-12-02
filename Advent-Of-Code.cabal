@@ -38,6 +38,19 @@ common days
                Day23.Main,
                Day24.Main,
                Day25.Main
+common days_new
+    other-modules: Day01.Main,
+               Day02.Main,
+               Day03.Main,
+               Day04.Main,
+               Day05.Main,
+               Day06.Main,
+               Day07.Main,
+               Day08.Main,
+               Day09.Main,
+               Day10.Main,
+               Day11.Main,
+               Day12.Main
 
 library
     import:           warnings
@@ -70,5 +83,20 @@ executable AOC2015
         Advent-Of-Code
 
     hs-source-dirs:   2015/app, 2015/src
+    default-language: Haskell2010
+
+executable AOC2025
+    import:           warnings, days_new
+    main-is:          Main.hs
+    -- other-modules:
+    -- other-extensions:
+    build-depends:
+        base ^>=4.17.2.1,
+        criterion-measurement,
+        ghc,
+        split,
+        Advent-Of-Code
+
+    hs-source-dirs:   2025/app, 2025/src
     default-language: Haskell2010
 

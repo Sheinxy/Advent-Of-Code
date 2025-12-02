@@ -15,7 +15,7 @@ mkdir $YEAR
 if ! fgrep "executable AOC$YEAR" Advent-Of-Code.cabal; then
 cat >> Advent-Of-Code.cabal <<EOF
 executable AOC$YEAR
-    import:           warnings, days
+    import:           warnings, days_new
     main-is:          Main.hs
     -- other-modules:
     -- other-extensions:

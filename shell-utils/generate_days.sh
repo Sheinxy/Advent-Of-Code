@@ -2,7 +2,7 @@
 
 cd $1
 
-for i in $(seq 1 25); do
+for i in $(seq 1 12); do
     num=`printf %02d $i`
     day=Day$num
     mkdir -p src/$day
