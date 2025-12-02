@@ -1,48 +1,37 @@
-#!/bin/bash
-
-mkdir -p $1/app
-cd $1/app
-
-cat > Main.hs <<EOF
 module Main where
 
-import Control.Exception (try, SomeException)
-import Control.Monad ((<\$!>))
-import Criterion.Measurement (initializeTime, getTime, secs)
-import Data.Char (isSpace)
-import Data.List (dropWhileEnd)
-import Data.List.Split (splitOn)
-EOF
+import           Control.Exception     (SomeException, try)
+import           Control.Monad         ((<$!>))
+import           Criterion.Measurement (getTime, initializeTime, secs)
+import           Data.Char             (isSpace)
+import           Data.List             (dropWhileEnd)
+import           Data.List.Split       (splitOn)
+import           Day01.Main            (day01)
+import           Day02.Main            (day02)
+import           Day03.Main            (day03)
+import           Day04.Main            (day04)
+import           Day05.Main            (day05)
+import           Day06.Main            (day06)
+import           Day07.Main            (day07)
+import           Day08.Main            (day08)
+import           Day09.Main            (day09)
+import           Day10.Main            (day10)
+import           Day11.Main            (day11)
+import           Day12.Main            (day12)
+import           System.Environment    (getArgs)
+import           System.IO             (hPrint, hPutStr, hPutStrLn, stderr)
+import           Text.Printf           (printf)
 
-for i in $(seq 1 25); do
-    num=`printf %02d $i`
-    echo "import Day$num.Main (day$num)" >> Main.hs
-done
+days :: [String -> String -> IO ()]
+days = [day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11, day12]
 
-echo "import Text.Printf (printf)" >> Main.hs
-echo "import System.Environment (getArgs)" >> Main.hs
-echo "import System.IO (hPrint, hPutStr, hPutStrLn, stderr)" >> Main.hs
-
-echo >> Main.hs
-echo "days :: [String -> String -> IO ()]" >> Main.hs
-echo -n 'days = [day01' >> Main.hs
-
-for i in $(seq 2 12); do
-    num=`printf %02d $i`
-    echo -n ", day$num" >> Main.hs
-done
-
-echo "]" >> Main.hs
-echo >> Main.hs
-
-cat >> Main.hs <<EOF
 computePart :: (String -> IO ()) -> String -> IO ()
 computePart func part = do
     tStart <- getTime
     result <- try (func part) :: IO (Either SomeException ())
     case result of
         Left e -> hPrint stderr e
-        _ -> return ()
+        _      -> return ()
     tEnd <- getTime
     let timeTaken = tEnd - tStart
     hPutStr stderr $ "    Part " ++ part ++ ": "
@@ -52,7 +41,7 @@ computePart func part = do
     hPutStrLn stderr $ colour ++ secs timeTaken ++ "\ESC[0m"
 
 getDefaultInput :: String -> String
-getDefaultInput n = "./$1/inputs/" ++ file
+getDefaultInput n = "./2025/inputs/" ++ file
     where n'   = read n :: Int
           file = printf "%02d" n' :: String
 
@@ -74,7 +63,7 @@ computeDay (n : args) = do
            let input = dropWhileEnd isSpace content'
            mapM_ (computePart $ func input) parts
     where parts = init args
-          file  | last args \`elem\` ["default", "def", "d"] = getDefaultInput n
+          file  | last args `elem` ["default", "def", "d"] = getDefaultInput n
                 | otherwise = last args
           func  = flip $ days !! (read n - 1)
 
@@ -82,7 +71,7 @@ main :: IO ()
 main = do
     initializeTime
     tStart <- getTime
-    args  <- splitOn ["/"] <\$!> getArgs
+    args  <- splitOn ["/"] <$!> getArgs
     mapM_ computeDay args
     tEnd <- getTime
     hPutStrLn stderr "Total:"
@@ -91,8 +80,3 @@ main = do
                | timeTaken < 250 = "\ESC[33m"
                | otherwise       = "\ESC[31m"
     hPutStrLn stderr $ "    " ++ colour ++ secs timeTaken ++ "\ESC[0m"
-EOF
-
-stylish-haskell -i Main.hs
-
-cd ..
