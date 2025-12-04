@@ -1,6 +1,7 @@
 module Day04.Main (day04) where
 
 import           AOC      (submit)
+import           Utils    (fixedPoint)
 import           Data.Set ((\\))
 import qualified Data.Set as S
 
@@ -25,9 +26,8 @@ partOne :: Input -> Output
 partOne = S.size . findAccessible
 
 partTwo :: Input -> Output
-partTwo rolls = S.size rolls - S.size (fix removeRolls rolls)
+partTwo rolls = S.size rolls - S.size (fixedPoint removeRolls rolls)
     where removeRolls rolls' = rolls' \\ findAccessible rolls'
-          fix f x = let x' = f x in if x == x' then x else fix f x'
 
 day04 :: String -> String -> IO ()
 day04 "parse" = print . parseInput

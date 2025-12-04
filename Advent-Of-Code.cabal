@@ -54,7 +54,7 @@ common days_new
 
 library
     import:           warnings
-    exposed-modules:  AOC
+    exposed-modules:  AOC, Utils
     -- other-modules:
     -- other-extensions:
     build-depends:    base ^>=4.17.2.1,
