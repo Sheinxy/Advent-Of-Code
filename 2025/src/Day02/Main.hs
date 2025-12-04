@@ -13,13 +13,14 @@ parseInput :: String -> Input
 parseInput = map (last2 . map read . splitOn "-") . splitOn ","
 
 -- https://oeis.org/A004216
--- a(n) = floo(log_10(n))
+-- a(n) = floor(log_10(n))
+-- That's just getting the number of digits in a number
 a004216 :: Integer -> Integer
 a004216 n = if n <= 9 then 0 else 1 + a004216 (n `div` 10)
 
 -- https://oeis.org/A020338
 -- a(n) = n*10^(A004216(n)+1) + n
--- This is the nth repeating number :D
+-- This is just repeating n twice :D
 a020338 :: Integer -> Integer
 a020338 n = n * 10 ^ (a004216 n + 1) + n
 
@@ -31,9 +32,9 @@ partOne input = sum . filter isInRange . map a020338 $ [1 .. 99999]
 -- Numbers which are not primitive words over the alphabet {0,...,9} (when written in base 10). 
 -- d is the length of the numbers
 a239019  :: Integer -> [Integer]
-a239019 d = S.toList r1
-  where r0 = S.fromList [x * (10 ^ d - 1) `div` 9 | x <- [1 .. 9]]
-        r1 = foldl step r0 . filter (/= d) $ primeFactors d
+a239019 d = S.toList r'
+  where r = S.fromList [x * (10 ^ d - 1) `div` 9 | x <- [1 .. 9]]
+        r' = foldl step r . filter (/= d) $ primeFactors d
         step acc p = S.union acc (S.fromList [x * (10 ^ d - 1) `div` (10 ^ q - 1) | x <- [10 ^ (q - 1) .. 10 ^ q - 1]])
             where q = d `div` p
 
