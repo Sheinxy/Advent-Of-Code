@@ -1,7 +1,6 @@
 module Day04.Main (day04) where
 
 import           AOC      (submit)
-import           Utils    (fixedPoint)
 import           Data.Set ((\\))
 import qualified Data.Set as S
 
@@ -26,8 +25,9 @@ partOne :: Input -> Output
 partOne = S.size . findAccessible
 
 partTwo :: Input -> Output
-partTwo rolls = S.size rolls - S.size (fixedPoint removeRolls rolls)
+partTwo rolls = S.size rolls - S.size finalState
     where removeRolls rolls' = rolls' \\ findAccessible rolls'
+          finalState = until (S.null . findAccessible) removeRolls rolls
 
 day04 :: String -> String -> IO ()
 day04 "parse" = print . parseInput

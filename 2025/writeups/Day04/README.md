@@ -74,6 +74,16 @@ partTwo rolls = S.size rolls - S.size (fix removeRolls rolls)
           fix f x = let x' = f x in if x == x' then x else fix f x'
 ```
 
+⚠️ After thinking about it more, I realized that checking if findAccessible yields
+and empty set might be slightly faster:
+
+```hs
+partTwo :: Input -> Output
+partTwo rolls = S.size rolls - S.size finalState
+    where removeRolls rolls' = rolls' \\ findAccessible rolls'
+          finalState = until (S.null . findAccessible) removeRolls rolls
+```
+
 ## Conclusion
 
 I don't really know what to write here lol.
