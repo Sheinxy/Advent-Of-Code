@@ -29,7 +29,7 @@ partOne input = sum . filter isInRange . map a020338 $ [1 .. 99999]
     where isInRange n = any (\(a, b) -> a <= n && n <= b) input
 
 -- https://oeis.org/A239019
--- Numbers which are not primitive words over the alphabet {0,...,9} (when written in base 10). 
+-- Numbers which are not primitive words over the alphabet {0,...,9} (when written in base 10).
 -- d is the length of the numbers
 a239019  :: Integer -> [Integer]
 a239019 d = S.toList r'
