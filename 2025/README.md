@@ -6,7 +6,7 @@ Watch me code in Haskell for 12 days straight
 | Day | Code | Writeup | Part 1 | Part 2 |
 |-----|-------|----------|--------|--------|
 | 01 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day01/Main.hs) | [WriteUp](./writeups/Day01) |✅|✅|
-| 02 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day02/Main.hs) | [WriteUp](./writeups/Day02) |  |  |
+| 02 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day02/Main.hs) | [WriteUp](./writeups/Day02) |✅|✅|
 | 03 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day03/Main.hs) | [WriteUp](./writeups/Day03) |  |  |
 | 04 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day04/Main.hs) | [WriteUp](./writeups/Day04) |  |  |
 | 05 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day05/Main.hs) | [WriteUp](./writeups/Day05) |  |  |
