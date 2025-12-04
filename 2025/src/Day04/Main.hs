@@ -1,18 +1,33 @@
 module Day04.Main (day04) where
 
-import           AOC (submit)
+import           AOC      (submit)
+import           Data.Set ((\\))
+import qualified Data.Set as S
 
-type Input = String
+type Input = S.Set (Int, Int)
 type Output = Int
 
 parseInput :: String -> Input
-parseInput = undefined
+parseInput raw = S.fromList . map fst . filter ((== '@') . snd) $
+            [ ((i, j), x)
+            | (i, row) <- zip [0..] grid,
+              (j, x) <- zip [0..] row
+            ]
+    where grid = lines raw
+
+findAccessible :: Input -> Input
+findAccessible rolls = S.filter isAccessible rolls
+    where isAccessible (i, j) = length adjacents < 4
+            where neighbours = [(i + di, j + dj) | di <- [-1 .. 1], dj <- [-1 .. 1], di /= 0 || dj /= 0]
+                  adjacents = filter (`S.member` rolls) neighbours
 
 partOne :: Input -> Output
-partOne = undefined
+partOne = S.size . findAccessible
 
 partTwo :: Input -> Output
-partTwo = undefined
+partTwo rolls = S.size rolls - S.size (fix removeRolls rolls)
+    where removeRolls rolls' = rolls' \\ findAccessible rolls'
+          fix f x = let x' = f x in if x == x' then x else fix f x'
 
 day04 :: String -> String -> IO ()
 day04 "parse" = print . parseInput
