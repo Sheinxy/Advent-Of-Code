@@ -1,11 +1,10 @@
 module Day05.Main (day05) where
 
 import           AOC                (submit)
-import           AOC.Utils          (between, isInRange)
+import           AOC.Utils          (isInRange)
 import           Data.List.Split    (splitOn)
-import           Data.RangeSet.List (RSet)
 import qualified Data.RangeSet.List as RSet
-import           GHC.Utils.Misc     (last2)
+import           GHC.Utils.Misc     (last2, count)
 
 type Input = ([(Int, Int)], [Int])
 type Output = Int
@@ -15,7 +14,7 @@ parseInput = (\[ranges, numbers] -> (map getRange ranges, map read numbers)) . s
     where getRange = last2 . map read . splitOn "-"
 
 partOne :: Input -> Output
-partOne (ranges, numbers) = length $ filter (\x -> any (isInRange x) ranges) numbers
+partOne (ranges, numbers) = count (\x -> any (isInRange x) ranges) numbers
 
 partTwo :: Input -> Output
 partTwo = RSet.size . RSet.fromRangeList . fst
