@@ -1,18 +1,24 @@
 module Day05.Main (day05) where
 
-import           AOC (submit)
+import           AOC                (submit)
+import           AOC.Utils          (between, isInRange)
+import           Data.List.Split    (splitOn)
+import           Data.RangeSet.List (RSet)
+import qualified Data.RangeSet.List as RSet
+import           GHC.Utils.Misc     (last2)
 
-type Input = String
+type Input = ([(Int, Int)], [Int])
 type Output = Int
 
 parseInput :: String -> Input
-parseInput = undefined
+parseInput = (\[ranges, numbers] -> (map getRange ranges, map read numbers)) . splitOn [""] . lines
+    where getRange = last2 . map read . splitOn "-"
 
 partOne :: Input -> Output
-partOne = undefined
+partOne (ranges, numbers) = length $ filter (\x -> any (isInRange x) ranges) numbers
 
 partTwo :: Input -> Output
-partTwo = undefined
+partTwo = RSet.size . RSet.fromRangeList . fst
 
 day05 :: String -> String -> IO ()
 day05 "parse" = print . parseInput

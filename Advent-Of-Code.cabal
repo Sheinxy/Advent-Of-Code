@@ -97,6 +97,7 @@ executable AOC2025
         criterion-measurement,
         ghc,
         primes,
+        range-set-list,
         split,
         Advent-Of-Code
 
