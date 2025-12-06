@@ -22,6 +22,8 @@ isInRange a (b, c)= between a b c
 isInRange' :: Ord a => a -> (a, a) -> Bool
 isInRange' a (b, c) = between' a b c
 
+-- TODO: Might find a better name. Might want to return [] when calling with []
+--
 -- Similar to groupBy but without the transitive property
 -- Each element in the sublist matches the predicate with at
 -- least one other element before it in the list.
