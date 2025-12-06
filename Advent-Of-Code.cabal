@@ -93,6 +93,7 @@ executable AOC2025
     build-depends:
         base ^>=4.17.2.1,
         array,
+        extra,
         containers,
         criterion-measurement,
         ghc,
