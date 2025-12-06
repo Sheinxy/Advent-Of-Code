@@ -87,4 +87,77 @@ Total:
     10.79 ms
 ```
 
+## Bonus: I'm not feeling sad anymore
 
+Alright, I was a bit sad that my solution was just a simple "import library",
+therefore I did it all by myself :D
+
+The idea here is pretty simple:
+- Merge ranges together when they can be merged
+- Then just add the cardinalities
+
+In order to merge ranges together, I start by sorting them. In that way,
+I make sure that they are adjacent in the list.
+
+Then, I use my own version of groupBy, which I called groupByNT:
+
+```hs
+-- Similar to groupBy but without the transitive property
+-- Each element in the sublist matches the predicate with at
+-- least one other element in the list before it.
+groupByNT :: (a -> a -> Bool) -> [a] -> [[a]]
+groupByNT predicate = groupByNT' []
+    where groupByNT' acc [] = [reverse acc]
+          groupByNT' [] (x : xs) = groupByNT' [x] xs
+          groupByNT' acc l@(x : xs) | any (predicate x) acc = groupByNT' (x : acc) xs
+                                    | otherwise = (reverse acc) : groupByNT' [] l
+```
+
+The thing with the regular groupBy is that the predicate is applied with the first element of the group.
+Here, the intersection predicate for some range might only work with the second element of the group,
+or the third, or the fourth etc.
+
+Take for example the following ranges:
+```hs
+[(1, 4), (2, 10), (5, 6)]
+```
+
+With groupBy, we would get
+```hs
+[[(1, 4), (2, 10)], [(5, 6)]]
+```
+
+Because the first element of the group doesn't intersect with (5, 6).
+
+We also need to check the whole group, and not just the directly adjacent element:
+```hs
+[(1, 4), (2, 10), (5, 6), (7, 8)]
+```
+
+With this function, I can compute the unions for the ranges:
+- start by sorting them
+- group them when they intersect
+- the new range starts at the smallest bound and ends at the highest one
+
+ ```hs
+unionize :: [(Int, Int)] -> [(Int, Int)]
+unionize = map (\l -> (minimum . map fst $ l, maximum . map snd $ l))
+         . groupByNT intersects . sort
+    where intersects (a, b) (c, d) = between a c d || between c a b
+
+partTwo' :: Input -> Output
+partTwo' = sum . map (\(a, b) -> b - a + 1) . unionize . fst
+```
+
+```sh
+➜  Advent-Of-Code git:(main) ✗ cabal run AOC2025 05 one two two\' 2025/inputs/05
+Day 05:
+635
+    Part one: 8.360 ms
+369761800782619
+    Part two: 1.547 ms
+369761800782619
+    Part two': 1.747 ms
+Total:
+    12.47 ms
+```
