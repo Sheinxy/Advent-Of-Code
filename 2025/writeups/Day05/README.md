@@ -113,6 +113,11 @@ groupByNT predicate = groupByNT' []
                                     | otherwise = (reverse acc) : groupByNT' [] l
 ```
 
+```
+⚠️ Note that this is not the final version for this function. It's just something
+I wrote on my phone during a car trip, it will be improved
+```
+
 The thing with the regular groupBy is that the predicate is applied with the first element of the group.
 Here, the intersection predicate for some range might only work with the second element of the group,
 or the third, or the fourth etc.
