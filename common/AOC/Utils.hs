@@ -24,7 +24,7 @@ isInRange' a (b, c) = between' a b c
 
 -- Similar to groupBy but without the transitive property
 -- Each element in the sublist matches the predicate with at
--- least one other element in the list before it.
+-- least one other element before it in the list.
 groupByNT :: (a -> a -> Bool) -> [a] -> [[a]]
 groupByNT predicate = groupByNT' []
     where groupByNT' acc [] = [reverse acc]
