@@ -2,7 +2,7 @@ module Day05.Main (day05) where
 
 import           AOC                (submit)
 import           AOC.Utils          (between, groupByNT, isInRange)
-import           Data.List          (maximum, minimum, sort)
+import           Data.List          (sort)
 import           Data.List.Split    (splitOn)
 import qualified Data.RangeSet.List as RSet
 import           GHC.Utils.Misc     (count, last2)

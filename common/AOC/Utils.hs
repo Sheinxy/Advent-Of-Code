@@ -29,6 +29,6 @@ groupByNT :: (a -> a -> Bool) -> [a] -> [[a]]
 groupByNT predicate = groupByNT' []
     where groupByNT' acc [] = [reverse acc]
           groupByNT' [] (x : xs) = groupByNT' [x] xs
-          groupByNT' acc l@(x : xs) | any (predicate x) acc = groupByNT' (x : acc) xs
+          groupByNT' acc l@(x : xs) | any (`predicate` x) acc = groupByNT' (x : acc) xs
                                     | otherwise = (reverse acc) : groupByNT' [] l
                                 
