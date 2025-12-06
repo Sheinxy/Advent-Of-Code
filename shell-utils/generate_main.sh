@@ -14,7 +14,7 @@ import Data.List (dropWhileEnd)
 import Data.List.Split (splitOn)
 EOF
 
-for i in $(seq 1 25); do
+for i in $(seq 1 12); do
     num=`printf %02d $i`
     echo "import Day$num.Main (day$num)" >> Main.hs
 done
