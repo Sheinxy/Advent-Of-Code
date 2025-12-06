@@ -23,7 +23,7 @@ partTwo = RSet.size . RSet.fromRangeList . fst
 unionize :: [(Int, Int)] -> [(Int, Int)]
 unionize = map (\l -> (minimum . map fst $ l, maximum . map snd $ l))
          . groupByNT intersects . sort
-    where intersects (a, b) (c, d) = between a c d || between c a b
+    where intersects (a, b) (c, d) = (a `between` c $ d) || (c `between` a $ b)
 
 partTwo' :: Input -> Output
 partTwo' = sum . map (\(a, b) -> b - a + 1) . unionize . fst
