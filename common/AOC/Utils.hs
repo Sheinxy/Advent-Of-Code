@@ -26,7 +26,7 @@ isInRange' a (b, c) = between' a b c
 -- the predicate with at least one earlier element in the same group.
 connectBy :: (a -> a -> Bool) -> [a] -> [[a]]
 connectBy _ [] = []
-connectBy predicate xs = go [] xs
+connectBy predicate (x : xs) = go [x] xs
     where go acc [] = [reverse acc]
           go acc (y : ys) | any (`predicate` y) acc = go (y : acc) ys
                           | otherwise = reverse acc : go [y] ys
