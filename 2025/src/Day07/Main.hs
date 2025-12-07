@@ -2,7 +2,7 @@ module Day07.Main (day07) where
 
 import           AOC                   (submit)
 import           AOC.Utils             (index2D)
-import           Data.Function.Memoize
+import           Data.Function.Memoize (memoFix)
 import           Data.List             (find)
 import qualified Data.Set              as S
 import           Data.Tuple.Extra      ((&&&))
