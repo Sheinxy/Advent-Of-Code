@@ -1,18 +1,35 @@
 module Day07.Main (day07) where
 
-import           AOC (submit)
+import           AOC                   (submit)
+import           AOC.Utils             (index2D)
+import           Data.Function.Memoize
+import           Data.List             (find)
+import qualified Data.Set              as S
+import           Data.Tuple.Extra      ((&&&))
+import           Safe                  (findJust)
 
-type Input = String
+type Input = ((Int, Int), [(Int, Int)])
 type Output = Int
 
 parseInput :: String -> Input
-parseInput = undefined
+parseInput = (fst . findJust ((== 'S') . snd) &&& map fst . filter ((== '^') . snd))
+           . index2D . lines
+
+findStop :: (Int, Int) -> [(Int, Int)] -> Maybe (Int, Int)
+findStop (r, c) splitters = find (\(i, j) -> r <= i && j == c) splitters
 
 partOne :: Input -> Output
-partOne = undefined
+partOne (start, splitters) = S.size . memoFix go $ start
+    where go f s = case findStop s splitters of
+                        Nothing     -> S.empty
+                        Just (i, j) -> S.insert (i, j) $ S.union (f (i, j - 1)) (f (i, j + 1))
+
 
 partTwo :: Input -> Output
-partTwo = undefined
+partTwo (start, splitters) = memoFix go start
+    where go f s = case findStop s splitters of
+                        Nothing     -> 1
+                        Just (i, j) -> f (i, j - 1) + f (i, j + 1)
 
 day07 :: String -> String -> IO ()
 day07 "parse" = print . parseInput

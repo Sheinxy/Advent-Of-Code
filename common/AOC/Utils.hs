@@ -30,3 +30,7 @@ connectBy predicate (x : xs) = go [x] xs
     where go acc [] = [reverse acc]
           go acc (y : ys) | any (`predicate` y) acc = go (y : acc) ys
                           | otherwise = reverse acc : go [y] ys
+
+-- Takes a 2D list and returns an indexed 1D list.
+index2D :: [[a]] -> [((Int, Int), a)]
+index2D g = [((i, j), x) | (i, row) <- zip [0..] g, (j, x) <- zip [0..] row]
