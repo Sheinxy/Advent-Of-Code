@@ -97,8 +97,10 @@ executable AOC2025
         containers,
         criterion-measurement,
         ghc,
+        memoize,
         primes,
         range-set-list,
+        safe,
         split,
         Advent-Of-Code
 
