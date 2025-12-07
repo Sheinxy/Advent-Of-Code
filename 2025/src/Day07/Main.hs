@@ -16,14 +16,13 @@ parseInput = (fst . findJust ((== 'S') . snd) &&& map fst . filter ((== '^') . s
            . index2D . lines
 
 findStop :: (Int, Int) -> [(Int, Int)] -> Maybe (Int, Int)
-findStop (r, c) splitters = find (\(i, j) -> r <= i && j == c) splitters
+findStop (r, c) = find (\(i, j) -> r <= i && j == c)
 
 partOne :: Input -> Output
 partOne (start, splitters) = S.size . memoFix go $ start
     where go f s = case findStop s splitters of
                         Nothing     -> S.empty
                         Just (i, j) -> S.insert (i, j) $ S.union (f (i, j - 1)) (f (i, j + 1))
-
 
 partTwo :: Input -> Output
 partTwo (start, splitters) = memoFix go start
