@@ -57,7 +57,7 @@ First question: given a starting position, which splitter (if any) will the beam
 
 This is simple: it’s just the first splitter below it in the same column.
 
-Because my list is ordered (thanks to how I parsed the input), I can use [`find`](https://hackage.haskell.org/package/base-4.21.0.0/docs/Data-List.html#v:find) to locate the first valid candidate:
+Because my list is ordered (thanks to how I parsed the input), I can use [find](https://hackage.haskell.org/package/base-4.21.0.0/docs/Data-List.html#v:find) to locate the first valid candidate:
 
 ```hs
 findStop :: (Int, Int) -> [(Int, Int)] -> Maybe (Int, Int)
@@ -101,7 +101,7 @@ The issue is pretty easy to grasp. Consider the following example (taken from th
 .....^.^.^.....
 ```
 
-Multiple beams can hit the same splitters. The simple fix is to `nub` the result, or store it in a `Set`.
+Multiple beams can hit the same splitters. The simple fix is to nub the result, or store it in a Set.
 
 ```hs
 partOne :: Input -> Output
@@ -114,7 +114,7 @@ partOne (start, splitters) = length (go start)
 However, we’ve got another issue: this is slow because we're recomputing the same things over and over.
 We *could* optimise by not recomputing already computed things, but honestly: memoizing everything is much easier :)
 
-To do that, I’m using [`memoFix`](https://hackage.haskell.org/package/memoize-1.1.2/docs/Data-Function-Memoize.html#v:memoFix). (Maybe one day I'll write a blog article explaining how it works, because I love this function).
+To do that, I’m using [memoFix](https://hackage.haskell.org/package/memoize-1.1.2/docs/Data-Function-Memoize.html#v:memoFix). (Maybe one day I'll write a blog article explaining how it works, because I love this function).
 
 ```hs
 partOne :: Input -> Output
@@ -127,7 +127,7 @@ partOne (start, splitters) = S.size . memoFix go $ start
 Sure, it’s not the *fastest* possible solution. We could optimise in a few ways:
 
 - prune search paths since beams only go downward,
-- avoid recomputing beams we later `nub` anyway.
+- avoid recomputing beams we later nub anyway.
 
 But honestly, I don’t care. It’s simple, elegant, and fast enough:
 
