@@ -79,7 +79,7 @@ In a component map, I can merge two components. That is:
 - The size of component id1 increases by the size of component id2
 - Component id2 gets emptied.
 
-```
+```hs
 mergeComponents :: Ord k => ComponentMap k -> Int -> Int -> ComponentMap k
 mergeComponents (ComponentMap mIds mSize) id1 id2 = ComponentMap mIds' mSize'
     where (idMerge, idVoid) =  (min id1 id2, max id1 id2)
