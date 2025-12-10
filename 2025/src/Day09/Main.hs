@@ -13,7 +13,7 @@ type Output = Int
 parseInput :: String -> Input
 parseInput = map (\x -> read $ "(" ++ x ++ ")") . lines
 
-area :: (Int, Int) -> (Int, Int) -> Int
+area :: Point -> Point -> Int
 area (a, b) (c, d) = (abs (a - c) + 1) * (abs (b - d) + 1)
 
 partOne :: Input -> Output
