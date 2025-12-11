@@ -1,7 +1,7 @@
 module Day10.Main (day10) where
 
 import           AOC              (submit)
-import           Control.Monad    (forM, (<=<))
+import           Control.Monad    ((<=<))
 import           Data.Bits
 import           Data.Foldable    (for_)
 import           Data.List        (elem, find, sortOn)
