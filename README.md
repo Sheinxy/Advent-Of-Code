@@ -55,8 +55,8 @@ cabal run AOC2015 23 sone d
 # Shell scripts
 
 I have a few helper shell scripts, however only ywo are really of interest here:
-- `./shell-utils/init_year.sh [-y|--year YEAR] [YEAR]: setups everything for a given year (defaults to the current year)`
-- `./shell-utils/retrieve_input.sh [-d|--day DAY] [--dry-run] [-nn|--no-new-dir] [-y|--year YEAD] [DAY]: retrieves the input for a give day and year (defaults to the current one). Dry runs will only print the year and day. If -nn is activated, the input will be places under the ./inputs folder, otherwise under the ./$YEAR/inputs one.`
+- ```./shell-utils/init_year.sh [-y|--year YEAR] [YEAR]: setups everything for a given year (defaults to the current year)```
+- ```./shell-utils/retrieve_input.sh [-d|--day DAY] [--dry-run] [-nn|--no-new-dir] [-y|--year YEAD] [DAY]: retrieves the input for a give day and year (defaults to the current one). Dry runs will only print the year and day. If -nn is activated, the input will be places under the ./inputs folder, otherwise under the ./$YEAR/inputs one.```
 
 # Write-Ups  
 
