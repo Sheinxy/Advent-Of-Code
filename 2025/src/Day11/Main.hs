@@ -28,7 +28,6 @@ partTwo input | fftToDac /= 0 && dacToFft /= 0 = error "Something went wrong. Pl
     where fftToDac = countPathFromTo "fft" "dac" input
           dacToFft = countPathFromTo "dac" "fft" input
 
-
 day11 :: String -> String -> IO ()
 day11 "parse" = print . parseInput
 day11 "one"   = print . partOne . parseInput
