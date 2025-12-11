@@ -14,7 +14,7 @@ Watch me code in Haskell for 12 days straight
 | 07 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day07/Main.hs) | [WriteUp](./writeups/Day07) |✅|✅|
 | 08 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day08/Main.hs) | [WriteUp](./writeups/Day08) |✅|✅|
 | 09 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day09/Main.hs) | [WriteUp](./writeups/Day09) |✅|✅|
-| 10 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day10/Main.hs) | [WriteUp](./writeups/Day10) |  |  |
+| 10 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day10/Main.hs) | [WriteUp](./writeups/Day10) |✅|✅|
 | 11 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day11/Main.hs) | [WriteUp](./writeups/Day11) |  |  |
 | 12 | [Code](https://github.com/Sheinxy/Advent-Of-Code/blob/main/2025/src/Day12/Main.hs) | [WriteUp](./writeups/Day12) |  |  |
 
