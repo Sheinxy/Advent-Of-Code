@@ -5,12 +5,13 @@ import           Data.List.Split     (splitOn)
 import           Data.Numbers.Primes (primeFactors)
 import qualified Data.Set            as S
 import           GHC.Utils.Misc      (last2)
+import           Data.Maybe          (fromJust)
 
 type Input = [(Integer, Integer)]
 type Output = Integer
 
 parseInput :: String -> Input
-parseInput = map (last2 . map read . splitOn "-") . splitOn ","
+parseInput = map (fromJust . last2 . map read . splitOn "-") . splitOn ","
 
 -- https://oeis.org/A004216
 -- a(n) = floor(log_10(n))

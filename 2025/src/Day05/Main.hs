@@ -6,13 +6,14 @@ import           Data.List          (sort)
 import           Data.List.Split    (splitOn)
 import qualified Data.RangeSet.List as RSet
 import           GHC.Utils.Misc     (count, last2)
+import           Data.Maybe         (fromJust)
 
 type Input = ([(Int, Int)], [Int])
 type Output = Int
 
 parseInput :: String -> Input
 parseInput = (\[ranges, numbers] -> (map getRange ranges, map read numbers)) . splitOn [""] . lines
-    where getRange = last2 . map read . splitOn "-"
+    where getRange = fromJust . last2 . map read . splitOn "-"
 
 partOne :: Input -> Output
 partOne (ranges, numbers) = count (\x -> any (isInRange x) ranges) numbers
