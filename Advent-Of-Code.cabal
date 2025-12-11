@@ -57,7 +57,7 @@ library
     exposed-modules:  AOC, AOC.Utils
     -- other-modules:
     -- other-extensions:
-    build-depends:    base ^>=4.17.2.1,
+    build-depends:    base, 
                       bytestring,
                       http-client,
                       http-conduit,
@@ -72,7 +72,7 @@ executable AOC2015
     -- other-modules:
     -- other-extensions:
     build-depends:
-        base ^>=4.17.2.1,
+        base,
         array,
         bytestring,
         criterion-measurement,
@@ -91,16 +91,17 @@ executable AOC2025
     -- other-modules:
     -- other-extensions:
     build-depends:
-        base ^>=4.17.2.1,
+        base,
         array,
-        extra,
         containers,
         criterion-measurement,
+        extra,
         ghc,
         memoize,
         primes,
         range-set-list,
         safe,
+        sbv,
         split,
         Advent-Of-Code
 
