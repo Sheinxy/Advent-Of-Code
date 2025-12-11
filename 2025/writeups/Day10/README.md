@@ -68,11 +68,11 @@ Now, why don't we just bruteforce this? After all, there aren't that many button
 
 Let's start by getting all the possible combinations of button presses. Such a set
 is called a [power set](https://en.wikipedia.org/wiki/Power_set). If we have three buttons (a, b, c), we could
-- Press no button {}
-- Press 1 button {{a}, {b}, {c}}
-- Press 2 buttons {{a, b}, {b, c}, {a, c}}
-- Press 3 buttons {{a, b, c}}
-This is the powerset! {{}, {a}, {b}, {c}, {a, b}, {b, c}, {a, c}, {a, b, c}}
+- Press no button \{\}
+- Press 1 button \{\{a\}, \{b\}, \{c\}\}
+- Press 2 buttons \{\{a, b\}, \{b, c\}, \{a, c\}\}
+- Press 3 buttons \{\{a, b, c\}\}
+This is the powerset! \{\{\}, \{a\}, \{b\}, \{c\}, \{a, b\}, \{b, c\}, \{a, c\}, \{a, b, c\}\}
 
 It's at most 2^n elements, so I think we should have at most 2^16 subsets to check for a line AT WORST. Fast enough :)
 
