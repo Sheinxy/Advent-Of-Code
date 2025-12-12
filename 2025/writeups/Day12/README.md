@@ -86,7 +86,8 @@ and the runtime even worse.
 
 "Maybe this kind of problem is quite famous.", I said. I opened my favorite search engine,
 duckduckgo (I like the funny duck), and typed "Packing Problem".\
-This led me to a [wikipedia page](https://en.wikipedia.org/wiki/Bin_packing_problem).
+This led me to a [wikipedia page](https://en.wikipedia.org/wiki/Covering_problem)
+
 
 "Goodness gracious!", I exclaimed, "This is a [NP-Complete](https://en.wikipedia.org/wiki/NP-complete) problem!"
 
