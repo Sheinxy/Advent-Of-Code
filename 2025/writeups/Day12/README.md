@@ -233,7 +233,7 @@ The End.
 
 Heya! 🐈‍⬛ 
 
-Are you still reading? Sorry for that weird writeup, I just thought it would be fun to
+Are you still reading? Sorry for that weird writeup, I just thought it would be funny to
 end on something like this, especially with such a weird last puzzle! :p
 
 Anyway, this is the part where I talk about my experience with this year's AoC,
@@ -244,7 +244,7 @@ so if you were only here to see me explain my solutions then you can leave I gue
 
 So, this year was quite different from usual eh? Only 12 days.
 
-I don't mind that much, though I feel like we've kind of lose the "Advent" part of the "Advent of Code".
+I don't mind that much, though I feel like we've kind of lost the "Advent" part of the "Advent of Code".
 
 Maybe releasing puzzles every other day would have been better? I don't know.
 
