@@ -48,9 +48,9 @@ Fortunately, I was used to parsing weird inputs at that point.\
 This was my sixth time participating, I was no longer a rookie and I knew just what to do.
 
 Without much hesitation, I started to write the code. It was a bit complex,\
-but not really hard. It started by getting the lines from the raw input,\
+but not really hard. It started by getting the lines from the raw input,
 before splitting on the empty lines.\
-For the first part, it simply removed the index line, while the parsing for the second\
+For the first part, it simply removed the index line, while the parsing for the second
 part was somewhat more complicated.\
 For each line of the second part, it started by splitting on colons. The left side was then split on the letter 'x' before converting to integers, while the second part was split by spaces before doing the same.\
 All of these were then put inside fitting data structures.
